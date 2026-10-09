@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- =====================================================
+       CONFIGURAÇÕES BÁSICAS DO DOCUMENTO
+       ===================================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIS Security Challenge</title>
+
+  <!-- Fonte principal da apresentação -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Arquivo de estilos -->
+  <link rel="stylesheet" href="styles.css">
+<style>
+.budget-guide{border:1px solid rgba(38,224,163,.45);background:rgba(38,224,163,.06);padding:16px 18px;border-radius:12px;margin:18px 0;color:var(--text,#eaf2f7)}
+.budget-guide>b{color:#26e0a3;font-size:.78rem;letter-spacing:.08em}.budget-guide p{margin:8px 0;font-size:.94rem;line-height:1.45;max-width:900px}.budget-guide .btn{margin-top:8px}
+@media(max-width:700px){.budget-guide{padding:12px}.budget-guide p{font-size:.88rem}}
+</style></head>
+
+<body>
+
+  <!-- Elementos decorativos do fundo -->
+  <div class="background-grid"></div>
+  <div class="scanline"></div>
+
+<!-- =====================================================
+         01. CABEÇALHO / NAVEGAÇÃO
+         ===================================================== -->
+<header class="navbar">
+  <div class="logo"><span class="logo-icon">⌁</span><div><strong>CIS</strong><small>SECURITY CHALLENGE</small></div></div>
+  <nav aria-label="Navegação rápida por todas as etapas">
+    <button onclick="goTo('inicio')">INÍCIO</button>
+    <button onclick="goTo('sobre')">INTRODUÇÃO</button>
+    <button onclick="goTo('cis03')">CIS 03</button>
+    <button onclick="goTo('cis04')">CIS 04</button>
+    <button onclick="goTo('caso-pratico')">CASO PRÁTICO</button>
+    <button onclick="goTo('casos-reais')">CASOS REAIS</button>
+    <button onclick="goTo('desafio')">ORÇAMENTO</button>
+    <button onclick="goTo('jogo')">SIMULAÇÃO</button>
+    <button onclick="goTo('quiz')">QUIZ FINAL</button>
+    <button onclick="goTo('encerramento')">ENCERRAMENTO</button>
+  </nav>
+  <div class="status"><i></i>SISTEMA ONLINE</div>
+</header>
+
+<!-- =====================================================
+         02. TELA INICIAL / HERO
+         ===================================================== -->
+<section id="inicio" class="hero section">
+  <div class="hero-content">
+    <div class="alert-label"><span>●</span> APRESENTAÇÃO • CIS CONTROLS 03 E 04</div>
+    <h1><span class="gradient-text">CIS</span><br>SECURITY<br><span class="outline-text">CHALLENGE</span></h1>
+    <p class="hero-description">Como proteger dados e reduzir falhas de configuração usando os CIS Controls 03 e 04.</p>
+    <div class="hero-cue">↓ <span>ENTENDA OS CONTROLES, VEJA OS CASOS E APLIQUE O APRENDIZADO</span></div>
+    <div class="hero-stats"><div><strong>03</strong><span>PROTEÇÃO<br>DE DADOS</span></div><div><strong>04</strong><span>CONFIGURAÇÃO<br>SEGURA</span></div><div><strong>26</strong><span>SALVAGUARDAS<br>INTERATIVAS</span></div></div>
+  </div>
+  <div class="hero-visual"><div class="radar"><div class="radar-line"></div><b>!</b><i class="p p1"></i><i class="p p2"></i><i class="p p3"></i></div></div>
+</section>
+
+<!-- =====================================================
+         03. INTRODUÇÃO AOS CONTROLES
+         ===================================================== -->
+<section id="sobre" class="section">
+  <div class="section-title"><span>01</span><div><small>MISSÃO</small><h2>O que estamos <em>protegendo?</em></h2></div></div>
+  <div class="intro-grid">
+    <div class="intro-text"><p class="big">Segurança cibernética não é apenas instalar um antivírus e torcer.</p><p>Os CIS Controls organizam práticas prioritárias para reduzir riscos. Nesta missão vamos investigar dois controles que se complementam.</p></div>
+    <div class="control-box blue"><b>03</b><small>CONTROLE</small><h3>Proteção de Dados</h3><p>Identificar, classificar, proteger, armazenar e descartar dados com segurança.</p></div>
+    <div class="control-box orange"><b>04</b><small>CONTROLE</small><h3>Configuração Segura</h3><p>Manter dispositivos, redes, servidores e softwares em um estado seguro.</p></div>
+  </div>
+</section>
+
+<!-- =====================================================
+         04. ESTRUTURA DA APRESENTAÇÃO / RUBRICA
+         ===================================================== -->
+<section class="section roadmap" id="mapa">
+  <div class="mission-header">
+    <div class="mission-kicker"><span>MAPA DA MISSÃO</span><i></i><small>FASE 00 / BRIEFING</small></div>
+    <div class="mission-title-row">
+      <div>
+        <h2>O que vamos <em>demonstrar?</em></h2>
+        <p>Vamos explicar as 26 salvaguardas e as ferramentas, diagnosticar falhas do CIS 04, analisar dois casos reais brasileiros, decidir como investir R$ 100 mil e aplicar o conteúdo na simulação SOC e no quiz final.</p>
+      </div>
+      <div class="mission-counter"><strong>26</strong><span>SAFEGUARDS<br>EM ANÁLISE</span></div>
+    </div>
+  </div>
+
+  <div class="mission-path">
+    <div class="mission-line"></div>
+
+    <div class="mission-card" onclick="flip(this)">
+      <div class="mission-inner">
+        <div class="mission-front">
+          <div class="mission-top"><span>01</span><b>CONTROLES</b></div>
+          <div class="mission-icon">◈</div>
+          <h3>Explicação<br><em>detalhada</em></h3>
+          <p>26 safeguards apresentados individualmente.</p>
+          <label>↻ CLIQUE PARA ABRIR</label>
+        </div>
+        <div class="mission-back">
+          <span>ETAPA 01 / FUNDAMENTAÇÃO</span>
+          <h3>O que será explicado?</h3>
+          <ul>
+            <li><b>CIS 03</b> · 14 safeguards de Proteção de Dados</li>
+            <li><b>CIS 04</b> · 12 safeguards de Configuração Segura</li>
+            <li>Objetivo, aplicação, risco reduzido e exemplo de cada safeguard</li>
+          </ul>
+          <strong>Resultado → entender o “porquê” de cada controle.</strong>
+          <label>↻ CLIQUE PARA VOLTAR</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission-card" onclick="flip(this)">
+      <div class="mission-inner">
+        <div class="mission-front orange">
+          <div class="mission-top"><span>02</span><b>CASOS</b></div>
+          <div class="mission-icon">⚠</div>
+          <h3>Dois exemplos<br><em>práticos</em></h3>
+          <p>Casos brasileiros reais e cenários fictícios conectados às salvaguardas.</p>
+          <label>↻ CLIQUE PARA ABRIR</label>
+        </div>
+        <div class="mission-back orange">
+          <span>ETAPA 02 / INVESTIGAÇÃO</span>
+          <h3>Onde o controle aparece?</h3>
+          <ul>
+            <li><b>Casos práticos</b> · diagnóstico e correção de configurações inseguras após o CIS 04</li>
+            <li><b>Casos reais</b> · ataque ao STJ (2020) e incidente Sisbajud (2025)</li>
+            <li>Ligação entre a vulnerabilidade, o safeguard e a correção</li>
+          </ul>
+          <strong>Resultado → visualizar o impacto quando a proteção falha.</strong>
+          <label>↻ CLIQUE PARA VOLTAR</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission-card" onclick="flip(this)">
+      <div class="mission-inner">
+        <div class="mission-front green">
+          <div class="mission-top"><span>03</span><b>DEFESA</b></div>
+          <div class="mission-icon">⚙</div>
+          <h3>Ferramentas<br><em>e automação</em></h3>
+          <p>Como transformar política em proteção contínua.</p>
+          <label>↻ CLIQUE PARA ABRIR</label>
+        </div>
+        <div class="mission-back green">
+          <span>ETAPA 03 / IMPLEMENTAÇÃO</span>
+          <h3>Como manter a proteção?</h3>
+          <ul>
+            <li>Ferramentas para criptografia, DLP, inventário e configuração</li>
+            <li>Monitoramento, políticas e verificações automatizadas</li>
+            <li>Alertas e respostas para reduzir trabalho manual</li>
+          </ul>
+          <strong>Resultado → sair da teoria e chegar à operação.</strong>
+          <label>↻ CLIQUE PARA VOLTAR</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission-footer">
+    <span>INÍCIO</span><i></i><span>CONTROLES</span><i></i><span>INVESTIGAÇÃO</span><i></i><span>DEFESA</span>
+  </div>
+</section>
+
+<!-- =====================================================
+         05. INCIDENTE INICIAL / CONTEXTO DO PROBLEMA
+         ===================================================== -->
+
+
+<!-- =====================================================
+         06. CIS CONTROL 03 - PROTEÇÃO DE DADOS
+         Contém os 14 safeguards: 3.1 a 3.14
+         ===================================================== -->
+<section id="cis03" class="section">
+  <div class="section-title"><span>03</span><div><small>CIS CONTROL</small><h2>Controle 03 <em>Proteção de Dados</em></h2></div></div>
+  <div class="control-hero bluehero"><b>03</b><div><small>DATA PROTECTION</small><h3>Proteger o dado durante todo o seu ciclo de vida.</h3><p>Identificar → classificar → acessar → proteger → armazenar → reter → descartar → auditar</p></div></div>
+<p class="hint">↻ Clique em cada card. Ele vira e mostra uma explicação, exemplo, risco e automação.</p>
+  <div class="flip-grid four">
+    <script>
+      const cis03 = [
+  ["3.1","Processo de gestão de dados","Estabelecer e manter um processo formal para gerenciar dados durante todo o seu ciclo de vida.","Ex.: definir responsáveis, regras de armazenamento, compartilhamento, retenção e descarte.","Sem processo, cada área pode tratar o mesmo dado de uma maneira diferente.","Automação: ferramentas de governança e classificação ajudam a aplicar políticas de forma centralizada."],
+  ["3.2","Inventário de dados","Estabelecer e manter um inventário dos dados da organização e de onde eles estão armazenados.","Ex.: identificar bancos, servidores, aplicações, planilhas, nuvem e dispositivos que armazenam dados sensíveis.","A organização precisa saber o que possui e onde está antes de conseguir proteger.","Automação: descoberta e classificação automatizada podem localizar dados sensíveis em diferentes repositórios."],
+  ["3.3","Listas de controle de acesso","Configurar controles que determinem quem pode acessar cada conjunto de dados.","Ex.: somente RH acessa dados salariais; outros departamentos recebem apenas o que precisam.","Reduz exposição e limita o impacto de uma conta comprometida.","Automação: IAM, grupos e RBAC permitem administrar permissões de forma centralizada."],
+  ["3.4","Retenção de dados","Estabelecer por quanto tempo cada categoria de dado deve ser mantida.","Ex.: definir prazo para documentos e eliminá-los quando a finalidade e as obrigações aplicáveis forem atendidas.","Guardar dados sem necessidade aumenta o impacto potencial de um incidente.","Automação: políticas de retenção podem aplicar prazos automaticamente em repositórios compatíveis."],
+  ["3.5","Descarte seguro","Processar a eliminação de dados de maneira segura e compatível com sua sensibilidade.","Ex.: sanitizar HDs antes do descarte, reutilização ou doação.","Um arquivo apagado nem sempre significa que os dados foram realmente destruídos.","Automação: ferramentas de sanitização podem registrar o processo e gerar evidências."],
+  ["3.6","Criptografia em dispositivos","Criptografar dados sensíveis armazenados em dispositivos de usuário final.","Ex.: BitLocker no Windows ou FileVault no macOS.","Se um notebook for perdido ou roubado, a criptografia dificulta o acesso ao conteúdo.","Automação: MDM/UEM pode exigir criptografia e verificar conformidade."],
+  ["3.7","Classificação de dados","Estabelecer e manter um esquema de classificação baseado na sensibilidade dos dados.","Ex.: Público, Interno, Confidencial e Sensível, cada categoria com regras próprias.","A classificação permite aplicar proteção proporcional ao risco.","Automação: Microsoft Purview e soluções DLP podem sugerir ou aplicar classificações."],
+  ["3.8","Fluxos de dados","Documentar os fluxos de entrada, processamento, armazenamento e saída dos dados.","Ex.: cliente → aplicação → banco → fornecedor → backup.","Ajuda a identificar pontos de exposição, integrações e terceiros envolvidos.","Automação: ferramentas de descoberta e mapeamento podem apoiar o levantamento de fluxos."],
+  ["3.9","Mídia removível","Proteger dados sensíveis armazenados em mídias removíveis.","Ex.: criptografar pendrives e HDs externos utilizados para transportar backups.","A perda física de uma mídia pode expor muitos registros de uma só vez.","Automação: políticas de endpoint podem exigir criptografia ou restringir o uso de mídias."],
+  ["3.10","Dados em trânsito","Criptografar dados sensíveis enquanto trafegam entre sistemas e redes.","Ex.: HTTPS/TLS, VPN e SSH.","Evita que informações sejam facilmente lidas ou manipuladas durante a transmissão.","Automação: certificados, políticas TLS e gateways seguros podem ser administrados centralmente."],
+  ["3.11","Dados em repouso","Criptografar dados sensíveis armazenados em servidores, aplicações e bancos de dados.","Ex.: criptografia de disco, volume, banco ou armazenamento em nuvem.","Mesmo que alguém obtenha acesso ao armazenamento, a informação permanece protegida por criptografia.","Automação: plataformas de nuvem e gerenciamento de chaves podem aplicar políticas de criptografia."],
+  ["3.12","Segmentação por sensibilidade","Separar processamento e armazenamento conforme a sensibilidade dos dados.","Ex.: informações altamente sensíveis em ambiente com acesso e controles mais restritos.","Limita o alcance de um comprometimento e evita que todos os dados fiquem expostos juntos.","Automação: segmentação de rede, políticas de acesso e ambientes separados podem aplicar a estratégia."],
+  ["3.13","Prevenção de perda de dados","Implementar uma solução de Data Loss Prevention para detectar e impedir movimentação indevida de dados.","Ex.: bloquear o envio de CPF de clientes para um e-mail pessoal.","Transforma regras de proteção em controles que podem agir automaticamente.","Automação: DLP pode detectar padrões, alertar, bloquear e registrar incidentes."],
+  ["3.14","Registro de acesso a dados","Registrar acessos a dados sensíveis para auditoria, detecção e investigação.","Ex.: registrar quem acessou uma base, quando acessou e qual ação realizou.","Sem logs, investigar abuso ou vazamento fica muito mais difícil.","Automação: SIEM pode centralizar, correlacionar e gerar alertas sobre acessos anômalos."]
+];
+      document.write(cis03.map(x=>`<div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><span class="num">${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p><label>↻ VIRAR CARD</label></div><div class="back"><span>EXPLICAÇÃO COMPLETA</span><h3>${x[1]}</h3><p>${x[2]}</p><div class="example"><b>EXEMPLO PRÁTICO</b>${x[3]}</div><strong>POR QUE IMPORTA</strong><p>${x[4]}</p><div class="example"><b>AUTOMAÇÃO / SOLUÇÃO</b>${x[5]}</div></div></div></div>`).join(""));
+    </script>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="section-title"><span>04</span><div><small>TOOLBOX</small><h2>Ferramentas do <em>Controle 03</em></h2></div></div>
+  <div class="flip-grid four">
+    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b class="tool">DP</b><h3>Microsoft Purview</h3><p>Classificação e DLP.</p><label>VER APLICAÇÃO</label></div><div class="back"><span>APLICAÇÃO</span><h3>Purview</h3><p>Aplica rótulos e políticas de forma centralizada. Pode alertar ou bloquear compartilhamentos indevidos automaticamente.</p><strong>CIS 03.7 / 03.13</strong></div></div></div>
+    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b class="tool">🔐</b><h3>BitLocker</h3><p>Criptografia de unidades.</p><label>VER APLICAÇÃO</label></div><div class="back"><span>APLICAÇÃO</span><h3>BitLocker</h3><p>Criptografa o disco. Com gestão centralizada, a equipe pode verificar quais dispositivos estão protegidos.</p><strong>CIS 03.6</strong></div></div></div>
+    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b class="tool">SSH</b><h3>SSH / TLS</h3><p>Comunicação segura.</p><label>VER APLICAÇÃO</label></div><div class="back"><span>APLICAÇÃO</span><h3>SSH / TLS</h3><p>TLS protege conexões web; SSH protege administração remota. Certificados e configurações podem ser padronizados e monitorados.</p><strong>CIS 03.10</strong></div></div></div>
+    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b class="tool">SIEM</b><h3>SIEM</h3><p>Logs e monitoramento.</p><label>VER APLICAÇÃO</label></div><div class="back"><span>APLICAÇÃO</span><h3>SIEM</h3><p>Reúne logs automaticamente e correlaciona alertas para acelerar a detecção e a investigação.</p><strong>CIS 03.14</strong></div></div></div>
+  </div>
+</section>
+
+<!-- =====================================================
+         09. CIS CONTROL 04 - CONFIGURAÇÃO SEGURA
+         Contém os 12 safeguards: 4.1 a 4.12
+         ===================================================== -->
+<section id="cis04" class="section dark">
+  <div class="section-title"><span class="orange">05</span><div><small>CIS CONTROL</small><h2>Controle 04 <em class="orangetxt">Configuração Segura</em></h2></div></div>
+  <div class="control-hero orangehero"><b>04</b><div><small>SECURE CONFIGURATION</small><h3>Reduzir a superfície de ataque mantendo os ativos em estado seguro.</h3><p>Configurar → padronizar → aplicar → verificar → corrigir → monitorar</p></div></div>
+<p class="hint">↻ Clique nos cards para ver a explicação completa.</p>
+  <div class="flip-grid four">
+    <script>
+      const cis04 = [
+  ["4.1","Processo de configuração segura","Estabelecer e manter um processo para configurar ativos corporativos e softwares de forma segura.","Ex.: criar uma configuração-base (baseline) para Windows, Linux, servidores e aplicações e aplicar essa referência aos novos ativos.","Por que importa: sem uma baseline, dois computadores iguais podem ter níveis de segurança completamente diferentes.","Automação: CIS Benchmarks + CIS-CAT podem orientar e verificar a conformidade."],
+  ["4.2","Configuração de rede","Estabelecer e manter configurações seguras para a infraestrutura de rede.","Ex.: aplicar configurações padronizadas em switches, roteadores, firewalls e pontos de acesso.","Por que importa: uma rede mal configurada pode expor serviços, credenciais e caminhos para movimentação lateral.","Automação: ferramentas de gerenciamento de configuração podem distribuir e verificar configurações."],
+  ["4.3","Bloqueio automático de sessão","Configurar o bloqueio automático das sessões dos ativos corporativos após um período de inatividade.","Ex.: o Windows bloqueia a estação depois de 10 minutos sem uso.","Por que importa: evita que outra pessoa use uma sessão corporativa deixada aberta.","Automação: Group Policy ou MDM pode aplicar a regra em centenas de máquinas."],
+  ["4.4","Firewall em servidores","Implementar e administrar firewall nos servidores para controlar conexões de entrada e saída.","Ex.: um servidor web permite apenas as portas necessárias e bloqueia o restante.","Por que importa: reduz a superfície de ataque e impede conexões que não deveriam existir.","Automação: políticas centralizadas podem manter regras consistentes e registrar alterações."],
+  ["4.5","Firewall em endpoints","Implementar e administrar firewall nos dispositivos de usuário final.","Ex.: notebooks corporativos permanecem com o firewall ativo mesmo fora da rede da empresa.","Por que importa: o endpoint continua exposto quando o usuário está em casa, hotel ou rede pública.","Automação: Intune, Group Policy ou MDM podem impor a configuração."],
+  ["4.6","Administração segura","Gerenciar ativos corporativos e softwares de forma segura, usando mecanismos de administração protegidos.","Ex.: utilizar HTTPS, SSH e canais autenticados para administrar servidores e equipamentos.","Por que importa: protocolos administrativos inseguros podem expor credenciais e comandos.","Automação: plataformas de gerenciamento centralizado reduzem administração manual e permitem auditoria."],
+  ["4.7","Contas padrão","Gerenciar contas padrão presentes em ativos e softwares, desabilitando-as ou tornando-as inutilizáveis quando não forem necessárias.","Ex.: alterar/remover credenciais padrão de administrador de um equipamento antes de colocá-lo na rede.","Por que importa: credenciais padrão são conhecidas e frequentemente exploradas por invasores.","Automação: scripts de provisionamento e políticas de configuração podem verificar contas padrão."],
+  ["4.8","Serviços desnecessários","Desinstalar ou desabilitar serviços que não são necessários para a função do ativo.","Ex.: desativar Telnet, FTP ou outros serviços antigos quando não forem utilizados.","Por que importa: cada serviço exposto pode representar uma porta de entrada adicional.","Automação: baseline de hardening pode definir quais serviços devem estar ativos e quais devem ser desabilitados."],
+  ["4.9","DNS confiável","Configurar os ativos para utilizar servidores DNS confiáveis e aprovados pela organização.","Ex.: endpoints utilizam resolutores DNS corporativos ou provedores aprovados em vez de servidores desconhecidos.","Por que importa: DNS é parte importante da resolução de nomes e pode ser abusado para redirecionamento ou comunicação maliciosa.","Automação: políticas de rede, DHCP e MDM podem distribuir os servidores DNS aprovados."],
+  ["4.10","Bloqueio automático de dispositivo portátil","Configurar o bloqueio automático de dispositivos portáteis de usuário final após um período definido de inatividade.","Ex.: um notebook corporativo bloqueia a tela automaticamente depois de alguns minutos sem uso.","Por que importa: reduz o risco de acesso indevido quando um dispositivo é deixado sem supervisão.","Automação: MDM/UEM e políticas de endpoint podem aplicar e verificar o tempo de bloqueio em toda a empresa."],
+  ["4.11","Limpeza remota","Estabelecer e manter a capacidade de apagar remotamente dados corporativos de dispositivos portáteis de usuário final.","Ex.: um celular corporativo é perdido e o administrador aciona o wipe pelo MDM.","Por que importa: reduz o impacto de perda ou roubo quando o equipamento sai do controle da organização.","Automação: MDM/UEM pode executar a ação remotamente após uma condição ou comando administrativo."],
+  ["4.12","Separação do ambiente corporativo","Separar o espaço de trabalho corporativo do espaço pessoal em dispositivos móveis.","Ex.: Android Work Profile mantém aplicativos e dados corporativos separados dos aplicativos pessoais.","Por que importa: limita o acesso de aplicativos pessoais aos dados corporativos e facilita o gerenciamento empresarial.","Automação: soluções MDM/UEM podem criar e aplicar o perfil corporativo automaticamente."]
+];
+      document.write(cis04.map(x=>`<div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><span class="num orange">${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p><label>↻ VIRAR CARD</label></div><div class="back"><span>EXPLICAÇÃO COMPLETA</span><h3>${x[1]}</h3><p>${x[2]}</p><div class="example orangebox"><b>EXEMPLO PRÁTICO</b>${x[3]}</div><strong>POR QUE IMPORTA</strong><p>${x[4]}</p><div class="example orangebox"><b>AUTOMAÇÃO / SOLUÇÃO</b>${x[5]}</div></div></div></div>`).join(""));
+    </script>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title"><span>10</span><div><small>TOOLBOX</small><h2>Ferramentas do <em>Controle 04</em></h2></div></div>
+  <div class="flip-grid four">
+    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b class="tool">CIS</b><h3>CIS Benchmarks</h3><p>Baselines de configuração.</p><label>VER DETALHES</label></div><div class="back"><span>APLICAÇÃO</span><h3>CIS Benchmarks</h3><p>Oferece padrões seguros para sistemas. A equipe usa a mesma referência em novos ativos e revisões.</p><strong>CIS 04.1</strong></div></div></div>
+    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b class="tool">CAT</b><h3>CIS-CAT</h3><p>Avaliação de conformidade.</p><label>VER DETALHES</label></div><div class="back"><span>APLICAÇÃO</span><h3>CIS-CAT</h3><p>Compara configurações com benchmarks e aponta desvios, reduzindo verificações manuais.</p><strong>VERIFICAÇÃO</strong></div></div></div>
+    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b class="tool">MS</b><h3>Intune</h3><p>Gerenciamento centralizado.</p><label>VER DETALHES</label></div><div class="back"><span>APLICAÇÃO</span><h3>Microsoft Intune</h3><p>Distribui políticas, exige configurações e acompanha conformidade de dispositivos gerenciados.</p><strong>MDM / HARDENING</strong></div></div></div>
+    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b class="tool">GP</b><h3>Group Policy</h3><p>Políticas Windows.</p><label>VER DETALHES</label></div><div class="back"><span>APLICAÇÃO</span><h3>Group Policy</h3><p>Permite aplicar configurações de segurança de forma centralizada em ambientes Windows/Active Directory.</p><strong>CIS 04.1–04.5</strong></div></div></div>
+  </div>
+</section>
+
+<section class="section" id="caso-pratico">
+  <div class="section-title"><span class="red">06</span><div><small>CASO PRÁTICO 01 · DIAGNÓSTICO</small><h2>Identifique as <em class="redtxt">falhas de configuração.</em></h2></div></div>
+  <p class="section-lead">Depois de conhecer as ferramentas do Controle 04, aplique o que aprendeu: investigue cada cartão, identifique o risco e revele a salvaguarda relacionada. Em seguida, veja como essas falhas podem se combinar no cenário seguinte.</p>
+  <div class="flip-grid four">
+    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b>🔑</b><h3>Conta padrão</h3><p>Credencial administrativa previsível.</p><label>INVESTIGAR</label></div><div class="back"><span>RISCO</span><h3>Privilégio indevido</h3><p>Contas padrão devem ser desabilitadas ou tornadas inutilizáveis.</p><strong>CIS 04.7</strong></div></div></div>
+    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b>🔥</b><h3>Firewall</h3><p>Conexões sem controle adequado.</p><label>INVESTIGAR</label></div><div class="back"><span>RISCO</span><h3>Superfície exposta</h3><p>Firewall deve permitir somente conexões justificadas.</p><strong>CIS 04.4 / 04.5</strong></div></div></div>
+    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b>⚙️</b><h3>Serviços</h3><p>Serviços antigos continuam ativos.</p><label>INVESTIGAR</label></div><div class="back"><span>RISCO</span><h3>Superfície desnecessária</h3><p>Serviços não utilizados devem ser removidos ou desabilitados.</p><strong>CIS 04.8</strong></div></div></div>
+    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b>🛡️</b><h3>Hardening</h3><p>Não existia baseline.</p><label>INVESTIGAR</label></div><div class="back"><span>SOLUÇÃO</span><h3>CIS Benchmarks</h3><p>Benchmarks fornecem recomendações prescritivas para configurar tecnologias de forma segura.</p><strong>CIS 04.1</strong></div></div></div>
+  </div>
+</section>
+
+<section class="section practical">
+  <div class="section-title"><span>07</span><div><small>CASO PRÁTICO 02 · APLICAÇÃO</small><h2>Como as falhas podem <em class="orangetxt">permitir um ataque.</em></h2></div></div>
+  <p class="section-lead">No primeiro caso, identificamos falhas isoladas. Agora, veja como elas podem se combinar em um servidor legado e quais medidas interrompem essa cadeia de risco.</p>
+  <div class="scenario">
+    <div class="scenario-head"><span>CASO FICTÍCIO • UMA EMPRESA</span><b>VULNERABILIDADE EXPLORADA</b></div>
+    <h3>Um servidor legado mantém Telnet ativo, uma conta padrão com senha conhecida e uma regra de firewall permissiva.</h3>
+    <div class="scenario-steps">
+      <div><b>01</b><strong>Descoberta</strong><p>O atacante identifica o serviço exposto.</p><small>CIS 04.8</small></div>
+      <div><b>02</b><strong>Acesso</strong><p>Usa credencial padrão ou fraca.</p><small>CIS 04.7</small></div>
+      <div><b>03</b><strong>Exploração</strong><p>A regra de rede permite a comunicação.</p><small>CIS 04.4 / 04.2</small></div>
+      <div><b>04</b><strong>Correção</strong><p>Hardening, firewall e gestão de contas eliminam as brechas.</p><small>CIS 04.1–04.8</small></div>
+    </div>
+    <div class="scenario-conclusion"><strong>LIÇÃO:</strong> uma configuração insegura pode transformar um serviço aparentemente pequeno em uma porta de entrada para o ambiente inteiro.</div>
+  </div>
+</section>
+
+<section class="section dark" id="casos-reais">
+  <div class="case-study">
+    <small>CASOS REAIS · BRASIL</small>
+    <h2>Incidentes reais. Riscos concretos.</h2>
+    <p>Dois episódios brasileiros ajudam a relacionar proteção de dados e configuração segura com situações reais. As salvaguardas abaixo são medidas relevantes para prevenção e resposta, não afirmações de que sua ausência comprovadamente causou os incidentes.</p>
+    <div class="case-grid">
+      <div><b>CASO 01 · STJ · 2020</b><strong>Ataque cibernético ao Superior Tribunal de Justiça</strong><p>Em novembro de 2020, um ataque interrompeu sistemas do tribunal e exigiu ações de recuperação. O episódio permite discutir preparação, proteção de servidores, registros e recuperação a partir de backups.</p><div class="case-controls"><b>CIS 04</b><div class="cis-chip-row"><details class="cis-detail"><summary>CIS 4.1</summary><p>Estabelecer e manter um processo de configuração segura para ativos e softwares.</p></details><details class="cis-detail"><summary>CIS 4.2</summary><p>Aplicar configurações seguras à infraestrutura de rede.</p></details><details class="cis-detail"><summary>CIS 4.4</summary><p>Gerenciar firewalls em servidores.</p></details><details class="cis-detail"><summary>CIS 4.6</summary><p>Gerenciar com segurança ativos corporativos e softwares.</p></details></div><b>CIS 03</b><div class="cis-chip-row"><details class="cis-detail"><summary>CIS 3.11</summary><p>Criptografar dados sensíveis armazenados.</p></details><details class="cis-detail"><summary>CIS 3.14</summary><p>Registrar acessos a dados sensíveis para apoiar detecção e investigação.</p></details></div></div><a href="https://www.stj.jus.br/sites/portalp/Paginas/Comunicacao/Noticias/19112020-Comunicado-da-Presidencia-do-STJ.aspx" target="_blank" rel="noopener">Fonte oficial: STJ ↗</a></div>
+      <div><b>CASO 02 · SISBAJUD · 2025</b><strong>Acesso indevido a dados cadastrais</strong><p>O CNJ informou que um incidente em julho de 2025 envolveu acesso indevido a dados cadastrais de 11.003.398 pessoas por meio de credenciais capturadas criminosamente. O comunicado afirmou que saldos, senhas e extratos bancários não foram acessados.</p><div class="case-controls"><b>CIS 03</b><div class="cis-chip-row"><details class="cis-detail"><summary>CIS 3.2</summary><p>Manter inventário dos dados tratados pela organização.</p></details><details class="cis-detail"><summary>CIS 3.3</summary><p>Definir listas de controle de acesso aos dados.</p></details><details class="cis-detail"><summary>CIS 3.7</summary><p>Classificar dados conforme sensibilidade e necessidade de proteção.</p></details><details class="cis-detail"><summary>CIS 3.13</summary><p>Implementar prevenção contra perda ou exfiltração de dados (DLP).</p></details><details class="cis-detail"><summary>CIS 3.14</summary><p>Registrar acessos a dados sensíveis para apoiar detecção e investigação.</p></details></div><b>CIS 04</b><div class="cis-chip-row"><details class="cis-detail"><summary>CIS 4.6</summary><p>Gerenciar com segurança ativos corporativos e softwares.</p></details><details class="cis-detail"><summary>CIS 4.7</summary><p>Gerenciar contas padrão para evitar uso indevido.</p></details></div></div><a href="https://www.cnj.jus.br/comunicado-de-incidente-de-seguranca/" target="_blank" rel="noopener">Fonte oficial: CNJ ↗</a></div>
+      <div><b>LIÇÃO EM COMUM</b><strong>Dados protegidos exigem várias camadas</strong><p>Controle de acesso, configurações seguras, registros, proteção de dados e capacidade de resposta precisam funcionar em conjunto. Nenhum controle isolado elimina todo o risco.</p><b>OBJETIVO DIDÁTICO</b><p>Identificar quais salvaguardas podem reduzir a probabilidade ou o impacto de incidentes semelhantes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="desafio" class="section">
+  <div class="section-title"><span class="orange">08</span><div><small>DESAFIO DA EQUIPE</small><h2>Proteja a empresa com <em>R$ 100 mil.</em></h2></div></div>
+  <div class="budget-layout">
+    <div class="budget">
+  <small>DESAFIO DE INVESTIMENTO</small>
+  <div class="budget-values">
+    <div><span>INVESTIDO</span><strong id="budgetSpent">R$ 0</strong></div>
+    <div><span>RESTANTE</span><strong id="budgetValue">R$ 100.000</strong></div>
+  </div>
+  <div class="bar"><i id="budgetProgress"></i></div>
+  <p id="budgetMessage">Selecione as medidas e monte sua estratégia.</p>
+</div>
+    <div class="investment-grid">
+      <button data-key="crypto" data-cost="15000" onclick="investment(this)">🔐 <b>Criptografia</b><small>R$ 15.000</small><span>Protege dados armazenados em equipamento perdido ou roubado.</span></button>
+      <button data-key="firewall" data-cost="10000" onclick="investment(this)">🔥 <b>Firewall</b><small>R$ 10.000</small><span>Bloqueia conexões não autorizadas.</span></button>
+      <button data-key="dlp" data-cost="30000" onclick="investment(this)">👁 <b>DLP</b><small>R$ 30.000</small><span>Detecta e bloqueia vazamento de dados sensíveis.</span></button>
+      <button data-key="iam" data-cost="20000" onclick="investment(this)">👤 <b>IAM / MFA</b><small>R$ 20.000</small><span>Limita acessos e adiciona MFA contra roubo de senha.</span></button>
+      <button data-key="mdm" data-cost="15000" onclick="investment(this)">📱 <b>MDM</b><small>R$ 15.000</small><span>Aplica políticas e permite bloquear ou apagar dados de dispositivos.</span></button>
+      <button data-key="siem" data-cost="30000" onclick="investment(this)">📊 <b>SIEM</b><small>R$ 30.000</small><span>Correlaciona logs para detectar e investigar ataques.</span></button>
+      <button data-key="hardening" data-cost="10000" onclick="investment(this)">🛠 <b>Hardening</b><small>R$ 10.000</small><span>Corrige configurações fracas e desativa serviços desnecessários.</span></button>
+    </div>
+    <div class="challenge-actions">
+      <div class="challenge-rule"><b>🎯 OBJETIVO</b><span>Use até R$ 100 mil. Escolha as medidas dentro do limite. A análise final vai mostrar o que sua estratégia cobre e o que ficou vulnerável.</span></div>
+      <button class="btn primary" onclick="analyzeInvestment()">ANALISAR ESTRATÉGIA →</button>
+    </div>
+    <div id="investmentResult" class="investment-result hidden"></div>
+  </div>
+</section>
+
+<!-- =====================================================
+         14. QUIZ / VERIFICAÇÃO DE APRENDIZADO
+         ===================================================== -->
+<section id="jogo" class="section dark">
+ <div class="section-title"><span>09</span><div><small>INVESTIGAÇÃO SOC</small><h2>Investigação de Incidente</h2></div></div>
+ <p class="quiz-intro">Analise as evidências, identifique a falha e contenha o risco.</p>
+ <div class="game-launch-panel"><div><b>Duração: cerca de 2 minutos</b><p>Três etapas curtas: pistas, resposta ao incidente e prevenção.</p></div><a class="btn primary" href="jogo/index.html" target="_blank" rel="noopener">ABRIR SIMULAÇÃO EM TELA CHEIA ↗</a></div>
+ <iframe class="gameframe" src="jogo/index.html" title="Operação Brecha Zero" loading="lazy"></iframe>
+</section>
+
+<section id="quiz" class="section dark">
+  <div class="section-title"><span>10</span><div><small>QUIZ FINAL AO VIVO</small><h2>Quem aprendeu <em>melhor o conteúdo?</em></h2></div></div>
+  <p class="quiz-intro">20 perguntas sobre os dois controles. Cada acerto vale 100 pontos. O desempate é pelo menor tempo total de resposta, medido do início ao envio final.</p>
+  <div class="live-quiz-layout">
+    <div class="live-quiz-panel">
+      <small>PAINEL DO APRESENTADOR</small>
+      <label for="quizUrl">Endereço público do quiz</label>
+      <input id="quizUrl" type="url" placeholder="https://usuario.github.io/repositorio/?modo=quiz">
+      <div id="qrcode" class="qrwrap">Cole a URL publicada para gerar o QR Code.</div>
+      <button id="makeQR" class="btn primary">GERAR QR CODE</button>
+      <p class="quiz-note">O ranking compartilhado exige configurar o Supabase conforme o README e testar com dois celulares.</p>
+      <div class="board-actions"><button id="refreshBoard" class="btn secondary">ATUALIZAR RANKING</button><button id="exportResults" class="btn secondary">EXPORTAR CSV</button></div>
+      <div id="backendNotice" class="backend-notice">Configure o Supabase para habilitar o ranking ao vivo.</div>
+    </div>
+    <div class="live-quiz-panel">
+      <div class="board-title"><h3>🏆 VENCEDOR + RANKING</h3><span id="participantCount">0 participantes</span></div><div id="winnerHighlight" class="winner-highlight">O vencedor será definido pelo maior número de acertos; o tempo desempata.</div>
+      <div id="leaderboard" class="leaderboard"><p class="empty">As pontuações aparecerão aqui.</p></div>
+      <div class="reportstats"><div><b id="totalAnswers">0</b><span>tentativas</span></div><div><b id="avgScore">0%</b><span>aproveitamento</span></div><div><b id="topScore">0</b><span>maior pontuação</span></div></div>
+      <div id="questionReport" class="question-report"></div>
+    </div>
+  </div>
+  <div class="quiz-how"><b>Como funciona</b><p>Cada participante escaneia o QR Code, registra um nome, responde às 20 perguntas e envia o resultado. O sistema destaca UM vencedor: maior pontuação e, em caso de empate, menor tempo. O painel permite atualizar e exportar o resultado.</p></div>
+</section>
+<section class="section final" id="encerramento">
+  <small>MISSÃO CONCLUÍDA</small>
+  <h2>Segurança em <em>camadas.</em></h2>
+  <p><strong>CIS 03</strong> protege o dado. <strong>CIS 04</strong> protege o ambiente. Os dois juntos reduzem o risco de vazamento e a superfície de ataque.</p>
+  <div class="equation"><div><b>03</b><span>DADOS</span></div><strong>+</strong><div><b>04</b><span>AMBIENTE</span></div><strong>=</strong><div class="green"><b>✓</b><span>DEFESA</span></div></div>
+  <button class="btn primary" onclick="goTo('inicio')">↺ REINICIAR MISSÃO</button>
+</section>
+
+<!-- Notificação rápida usada pelas interações da apresentação -->
+<div id="toast"></div>
+<script>
+// -----------------------------------------------------
+// NAVEGAÇÃO ENTRE SEÇÕES
+// -----------------------------------------------------
+function goTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:"smooth",block:"start"});}
+function startMission(){goTo("incidente");showToast("MISSÃO INICIADA: investigue as falhas.");}
+// -----------------------------------------------------
+// INTERAÇÃO DOS CARDS: FRENTE <-> VERSO
+// -----------------------------------------------------
+function flip(card){card.classList.toggle("flipped");}
+
+function showToast(text){
+ const t=document.getElementById("toast");t.textContent=text;t.classList.add("show");
+ setTimeout(()=>t.classList.remove("show"),2600);
+}
+
+// -----------------------------------------------------
+// SIMULAÇÃO DE ATAQUE
+// -----------------------------------------------------
+let attackStageIndex = -1;
+const attackStages = [
+ {tag:"SCAN", text:"Portas e serviços identificados.", cls:"yellow", title:"1. Reconhecimento", body:"O atacante encontra um serviço desnecessário exposto no servidor.", control:"CIS 04.8", controlText:"Serviços desnecessários devem ser removidos ou desabilitados para reduzir a superfície de ataque."},
+ {tag:"FIREWALL", text:"Regra permissiva encontrada.", cls:"yellow", title:"2. Entrada pela rede", body:"Uma regra de firewall permite uma comunicação que deveria ser bloqueada.", control:"CIS 04.4 / 04.5", controlText:"Firewalls em servidores e dispositivos devem restringir tráfego desnecessário e não autorizado."},
+ {tag:"ATTACK", text:"Acesso ao servidor obtido.", cls:"red", title:"3. Comprometimento", body:"O atacante consegue alcançar o servidor por causa das configurações inseguras.", control:"CIS 04.1 / 04.7", controlText:"Configuração segura e gestão de contas padrão reduzem caminhos de acesso indevido."},
+ {tag:"DATA", text:"Tentativa de acesso aos dados sensíveis.", cls:"red", title:"4. Acesso aos dados", body:"O atacante tenta alcançar informações de clientes armazenadas no ambiente.", control:"CIS 03.3 / 03.11 / 03.13", controlText:"Controle de acesso, criptografia em repouso e DLP devem limitar ou proteger os dados."},
+ {tag:"ALERT", text:"Dados encontrados. Risco de exposição identificado.", cls:"red", title:"5. Impacto", body:"O ataque chegou aos dados. Agora entram os controles de prevenção, proteção e detecção.", control:"CIS 03.13 / 03.14", controlText:"DLP ajuda a impedir vazamentos e o registro de acesso permite investigar acessos a dados sensíveis."},
+ {tag:"SYSTEM", text:"Simulação concluída: ambiente vulnerável.", cls:"red", title:"Resultado da simulação", body:"O ataque avançou porque várias camadas de proteção falharam. A defesa depende de controles complementares.", control:"CIS 03 + CIS 04", controlText:"Proteção de dados e configuração segura atuam em pontos diferentes para reduzir exposição e impacto."}
+];
+
+function runAttack(){
+ const out=document.getElementById("consoleOutput");
+ const explanation=document.getElementById("attackExplanation");
+ const btn=document.getElementById("attackNextBtn");
+ if(!out || !explanation || !btn) return;
+
+ // NÃO existe temporizador nesta simulação. Uma etapa só avança após um novo clique.
+ if(attackStageIndex >= attackStages.length - 1){
+   attackStageIndex = -1;
+   out.innerHTML='<p><span class="green">SYSTEM</span> Simulação reiniciada.</p><p><span class="yellow">INFO</span> Clique para iniciar. Cada clique revela UMA única etapa.</p>';
+   explanation.innerHTML='<small>ANÁLISE DA ETAPA</small><h3>Ataque ainda não iniciado</h3><p>O apresentador controla o ritmo. Clique em “Executar ataque” e depois em “Próxima etapa” somente quando terminar a explicação.</p><div class="control-link"><strong>OBJETIVO</strong><span>Relacionar cada vulnerabilidade ao CIS 03 ou CIS 04.</span></div>';
+   btn.textContent='▶ EXECUTAR ATAQUE';
+   document.querySelectorAll('.attack-map .node').forEach(n=>n.classList.remove('active-stage'));
+   return;
+ }
+
+ attackStageIndex++;
+ const m=attackStages[attackStageIndex];
+ const p=document.createElement("p");
+ p.innerHTML=`<span class="${m.cls}">${m.tag}</span> ${m.text}`;
+ out.appendChild(p);
+ out.scrollTop=out.scrollHeight;
+ explanation.innerHTML=`<small>ANÁLISE DA ETAPA ${attackStageIndex+1}/${attackStages.length}</small><h3>${m.title}</h3><p>${m.body}</p><div class="control-link"><strong>${m.control}</strong><span>${m.controlText}</span></div>`;
+ document.querySelectorAll('.attack-map .node').forEach(n=>n.classList.toggle('active-stage', Number(n.dataset.stage)===Math.min(attackStageIndex+1,4)));
+
+ if(attackStageIndex===0){
+   btn.textContent='→ PRÓXIMA ETAPA';
+ } else if(attackStageIndex===attackStages.length-1){
+   btn.textContent='↻ REINICIAR SIMULAÇÃO';
+ } else {
+   btn.textContent='→ PRÓXIMA ETAPA';
+ }
+}
+// -----------------------------------------------------
+// DESAFIO DO ORÇAMENTO
+// -----------------------------------------------------
+let spent=0;
+const BUDGET=100000;
+const formatBRL=(value)=>value.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0});
+function investment(btn){
+ const cost=Number(btn.dataset.cost);
+ if(btn.classList.contains("selected")){btn.classList.remove("selected");spent-=cost;}
+ else{
+  if(spent+cost>BUDGET){showToast("ORÇAMENTO EXCEDIDO. Retire uma medida ou escolha outra.");return;}
+  btn.classList.add("selected");spent+=cost;
+ }
+ updateInvestmentPanel();
+ document.getElementById("investmentResult").classList.add("hidden");
+}
+function updateInvestmentPanel(){
+ const remain=BUDGET-spent;
+ document.getElementById("budgetSpent").textContent=formatBRL(spent);
+ document.getElementById("budgetValue").textContent=formatBRL(remain);
+ document.getElementById("budgetProgress").style.width=(spent/BUDGET*100)+"%";
+ document.getElementById("budgetMessage").textContent=
+ spent===0?"Escolha as medidas e monte sua estratégia.":
+ spent<BUDGET?"Você ainda tem orçamento disponível. Pense nos riscos que ficaram sem cobertura.":
+ "Orçamento totalmente utilizado. Agora analise e justifique sua estratégia.";
+}
+
+
+function analyzeInvestment(){
+ const selected=[...document.querySelectorAll('.investment-grid button.selected')];
+ const result=document.getElementById('investmentResult');
+ if(!selected.length){
+   result.className='investment-result bad';
+   result.innerHTML='<strong>ESTRATÉGIA NÃO DEFINIDA</strong><p>Selecione as medidas e clique em analisar.</p>';
+   return;
+ }
+ const keys=selected.map(b=>b.dataset.key);
+ const names=selected.map(b=>b.querySelector('b').textContent);
+ const remaining=BUDGET-spent;
+ const referenceNote='<div class="reference-after"><strong>REFERÊNCIA PARA COMPARAR</strong><p>Uma combinação equilibrada para este cenário seria hardening + firewall + IAM/MFA + DLP + SIEM. Ela cobre configuração, conexões, acesso, prevenção de vazamento e investigação.</p><p>Não é uma resposta universal: a escolha depende dos riscos e dos ativos da organização.</p></div>';
+
+ const coverage={
+  crypto:{name:"Criptografia",pre:"Evita que dados armazenados sejam lidos sem a chave, por exemplo se um notebook ou disco for roubado.",post:"Depois de um incidente, reduz a exposição do conteúdo armazenado, mas não impede por si só que alguém autorizado copie dados já desbloqueados.",cis:"CIS 03.06 e 03.11"},
+  firewall:{name:"Firewall",pre:"Restringe conexões de entrada e saída conforme regras. Ajuda a bloquear portas e comunicações não autorizadas.",post:"Durante um incidente, pode bloquear o caminho de rede identificado. Não apaga dados já copiados e não substitui DLP.",cis:"CIS 04.04 e 04.05"},
+  dlp:{name:"DLP",pre:"Identifica e pode bloquear tentativas de compartilhar ou transferir dados sensíveis fora das regras.",post:"Depois de detectar uma transferência indevida, pode interromper novas saídas e gerar alertas. A resposta ainda precisa investigar o que já saiu.",cis:"CIS 03.13"},
+  iam:{name:"IAM / MFA",pre:"Limita quem acessa sistemas e exige mais de uma evidência de identidade. Reduz o risco de credenciais roubadas serem suficientes.",post:"Após suspeita de conta comprometida, permite revogar sessões, redefinir credenciais e revisar privilégios.",cis:"CIS 03.03 e salvaguardas de configuração relacionadas"},
+  mdm:{name:"MDM",pre:"Gerencia dispositivos móveis e aplica políticas, como bloqueio, criptografia e separação do espaço corporativo.",post:"Se o dispositivo for perdido, permite bloquear ou apagar dados corporativos remotamente, conforme a configuração.",cis:"CIS 04.10, 04.11 e 04.12"},
+  siem:{name:"SIEM",pre:"Centraliza e correlaciona logs para encontrar sinais de comportamento suspeito. Detectar cedo reduz o tempo até a resposta.",post:"Ajuda a reconstruir a sequência do incidente, identificar contas e ativos envolvidos e preservar evidências. Sozinho, não corrige a causa.",cis:"CIS 03.14 e monitoramento complementar"},
+  hardening:{name:"Hardening",pre:"Aplica uma configuração-base segura, desativa serviços desnecessários e reduz pontos de entrada.",post:"Após o incidente, ajuda a corrigir a causa técnica, padronizar os ativos e evitar que a mesma brecha continue aberta.",cis:"CIS 04.01, 04.06, 04.07 e 04.08"}
+ };
+ const recommendations={
+  dlp:"Sem DLP, uma transferência de dados sensíveis pode passar despercebida.",
+  siem:"Sem registros centralizados, descobrir o que aconteceu e quais sistemas foram afetados fica muito mais difícil.",
+  iam:"Sem controle de identidade e autenticação forte, uma senha roubada pode abrir caminho para sistemas importantes.",
+  firewall:"Sem regras de rede, serviços expostos podem ser alcançados por conexões que deveriam ser bloqueadas.",
+  hardening:"Sem hardening, serviços antigos, configurações padrão e portas desnecessárias ampliam a superfície de ataque.",
+  crypto:"Sem criptografia, o roubo físico de um dispositivo ou mídia pode expor os dados armazenados.",
+  mdm:"Sem gerenciamento de dispositivos, um celular perdido pode manter dados corporativos sem bloqueio ou apagamento remoto."
+ };
+ const gaps=Object.keys(recommendations).filter(k=>!keys.includes(k));
+ const balanced=["dlp","siem","iam","firewall","hardening"].every(k=>keys.includes(k)) && keys.length===5;
+ let title=balanced?"ESTRATÉGIA DE REFERÊNCIA":spent===BUDGET?"ORÇAMENTO TOTALMENTE ALOCADO":"ESTRATÉGIA COM TRADE-OFFS";
+ let intro=balanced
+  ?"Sua combinação cobre prevenção de vazamento, detecção, identidade, rede e redução de superfície de ataque. É uma boa defesa em camadas para este cenário."
+  :`Você investiu ${formatBRL(spent)} e deixou ${formatBRL(remaining)} disponíveis. Gastar tudo não significa estar protegido; gastar menos também pode ser válido, desde que o risco restante seja entendido e justificado.`;
+ const choiceHTML=selected.map(b=>{
+  const k=b.dataset.key, x=coverage[k];
+  return `<div class="simple-choice"><b>✓ ${x.name}</b><span>${formatBRL(Number(b.dataset.cost))}</span><p>${x.pre.split('.')[0]}.</p></div>`;
+ }).join("");
+ const gapsHTML=gaps.map(k=>`<li><b>${coverage[k].name}:</b> ${recommendations[k]}</li>`).join("");
+ result.className='investment-result '+(balanced?'good':'');
+ result.innerHTML=`<div class="result-top"><span>RESULTADO DA ESTRATÉGIA</span><h3>${balanced?'Boa cobertura de riscos':'O que sua escolha protege'}</h3><p>Investido: <b>${formatBRL(spent)}</b> · Saldo: <b>${formatBRL(remaining)}</b></p></div>
+ <h4>O que você protegeu</h4><div class="simple-choice-grid">${choiceHTML}</div>
+ <h4>Riscos que ficaram sem cobertura</h4>${gaps.length?`<ul class="simple-gaps">${gapsHTML}</ul>`:'<p>Você selecionou todas as medidas disponíveis. Ainda é necessário configurá-las e monitorá-las.</p>'}
+ <div class="reference-after"><h4>Referência para comparar</h4><p><b>Hardening + Firewall + IAM/MFA + DLP + SIEM.</b></p><p>Essa combinação cobre configuração segura, conexões, acessos, prevenção de vazamentos e investigação. Não é uma receita universal; depende dos riscos da organização.</p></div>`;
+ result.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+</script>
+
+<section class="section references-section">
+  <div class="section-title"><span>11</span><div><small>FONTES</small><h2>Referências <em>utilizadas</em></h2></div></div>
+  <ul class="source-list">
+    <li><a href="https://www.cisecurity.org/controls" target="_blank" rel="noopener">CIS Critical Security Controls</a> — estrutura e salvaguardas dos controles 03 e 04.</li>
+    <li><a href="https://www.stj.jus.br/sites/portalp/Paginas/Comunicacao/Noticias/19112020-Comunicado-da-Presidencia-do-STJ.aspx" target="_blank" rel="noopener">Superior Tribunal de Justiça (novembro de 2020)</a> — comunicado oficial sobre o ataque cibernético.</li>
+    <li><a href="https://www.cnj.jus.br/comunicado-de-incidente-de-seguranca/" target="_blank" rel="noopener">Conselho Nacional de Justiça (julho de 2025)</a> — comunicado sobre incidente de segurança no Sisbajud.</li>
+    <li><a href="https://www.cisecurity.org/cis-benchmarks" target="_blank" rel="noopener">CIS Benchmarks</a> — referências de configuração segura.</li>
+    <li><a href="https://learn.microsoft.com/en-us/purview/" target="_blank" rel="noopener">Microsoft Purview</a>, <a href="https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/" target="_blank" rel="noopener">BitLocker</a> e <a href="https://learn.microsoft.com/en-us/mem/intune/fundamentals/what-is-intune" target="_blank" rel="noopener">Microsoft Intune</a> — documentação das ferramentas citadas.</li>
+  </ul>
+</section>
+
+<section id="participantView" class="participant-view hidden">
+ <div class="participant-card">
+  <div class="participant-brand">◈ BRECHA ZERO • QUIZ AO VIVO</div>
+  <h1>Entre no ranking.</h1><p>Use seu nome ou apelido. São 20 perguntas. Cada acerto vale 100 pontos.</p>
+  <form id="joinForm"><label for="playerName">Nome ou apelido</label><input id="playerName" maxlength="30" required placeholder="Ex.: Ana"><button class="btn primary full">COMEÇAR QUIZ</button></form>
+  <div id="participantQuiz" class="hidden"><div id="pQuestionCount" class="participant-progress"></div><h2 id="pQuestion"></h2><div id="pOptions" class="participant-choices"></div><div id="pFeedback" class="participant-feedback hidden"></div><button id="pNext" class="btn primary full hidden">PRÓXIMA →</button></div>
+  <div id="participantDone" class="hidden"><h2>Quiz concluído!</h2><p id="doneText"></p><p>Seu resultado foi enviado para o ranking, quando o banco está conectado.</p></div>
+  <p id="participantStatus" class="participant-status"></p>
+ </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+</body>
+</html>
