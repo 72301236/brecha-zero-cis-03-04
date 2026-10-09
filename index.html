@@ -39,6 +39,7 @@
     <button onclick="goTo('cis04')">CIS 04</button>
     <button onclick="goTo('caso-pratico')">CASO PRÁTICO</button>
     <button onclick="goTo('casos-reais')">CASOS REAIS</button>
+    <button onclick="goTo('attackflow-landing')">ATAQUE</button>
     <button onclick="goTo('desafio')">ORÇAMENTO</button>
     <button onclick="goTo('jogo')">SIMULAÇÃO</button>
     <button onclick="goTo('quiz')">QUIZ FINAL</button>
@@ -293,6 +294,35 @@
   </div>
 </section>
 
+<!-- =====================================================
+         DINÂMICA VISUAL DA APRESENTAÇÃO: PROGRESSÃO DO ATAQUE
+         Esta dinâmica fica na landing page. O jogo SOC real está em /jogo/.
+         ===================================================== -->
+<section id="attackflow-landing" class="section dark attackflow-landing">
+  <div class="section-title"><span>05</span><div><small>DINÂMICA DA APRESENTAÇÃO</small><h2>O ataque <em>começou.</em></h2></div></div>
+  <p class="attackflow-intro">Acompanhe a progressão de um ataque fictício. A cada clique, uma nova etapa aparece no terminal e você relaciona a falha ao CIS 03 ou CIS 04.</p>
+  <div class="attack-map" aria-label="Progressão do ataque">
+    <div class="node danger" data-stage="1"><b>☷ ATACANTE</b><span>Reconhecimento</span><small>CIS 04.08</small></div><i>→</i>
+    <div class="node orange" data-stage="2"><b>◎ REDE</b><span>Firewall permissivo</span><small>CIS 04.04 / 04.05</small></div><i>→</i>
+    <div class="node danger" data-stage="3"><b>▤ SERVIDOR</b><span>Acesso obtido</span><small>CIS 04.01 / 04.07</small></div><i>→</i>
+    <div class="node" data-stage="4"><b>▣ DADOS</b><span>Informação sensível</span><small>CIS 03.03 / 03.11 / 03.13</small></div>
+  </div>
+  <div class="attackflow-workspace">
+    <div class="console attackflow-terminal">
+      <div class="console-top">● ● ● <span>ATTACK_SIMULATION.EXE</span></div>
+      <div id="consoleOutput"><p><span class="green">SYSTEM</span> Pronto para iniciar a simulação.</p><p><span class="yellow">INFO</span> Clique para revelar uma etapa por vez.</p></div>
+      <button id="attackNextBtn" class="btn primary attack-next" onclick="runAttack()">▶ EXECUTAR ATAQUE</button>
+    </div>
+    <aside id="attackExplanation" class="attack-explanation">
+      <small>ANÁLISE DA ETAPA</small>
+      <h3>Ataque ainda não iniciado</h3>
+      <p>O apresentador controla o ritmo. Cada clique revela apenas uma etapa, permitindo explicar o risco antes de avançar.</p>
+      <div class="control-link"><strong>OBJETIVO</strong><span>Relacionar cada vulnerabilidade ao CIS 03 ou CIS 04.</span></div>
+    </aside>
+  </div>
+  <p class="attackflow-note">Esta é uma dinâmica visual da apresentação. A investigação interativa com pressão do ataque, cronômetro, sensores e ações de contenção está na seção “Investigação SOC” abaixo.</p>
+</section>
+
 <section id="desafio" class="section">
   <div class="section-title"><span class="orange">08</span><div><small>DESAFIO DA EQUIPE</small><h2>Proteja a empresa com <em>R$ 100 mil.</em></h2></div></div>
   <div class="budget-layout">
@@ -328,8 +358,8 @@
 <section id="jogo" class="section dark">
  <div class="section-title"><span>09</span><div><small>INVESTIGAÇÃO SOC</small><h2>Investigação de Incidente</h2></div></div>
  <p class="quiz-intro">Analise as evidências, identifique a falha e contenha o risco.</p>
- <div class="game-launch-panel"><div><b>Duração: cerca de 2 minutos</b><p>Três etapas curtas: pistas, resposta ao incidente e prevenção.</p></div><a class="btn primary" href="jogo/index.html" target="_blank" rel="noopener">ABRIR SIMULAÇÃO EM TELA CHEIA ↗</a></div>
- <iframe class="gameframe" src="jogo/index.html" title="Operação Brecha Zero" loading="lazy"></iframe>
+ <div class="game-launch-panel"><div><b>Investigação SOC interativa</b><p>Quatro fases com cronômetro, sensores, eventos, correção de falhas e redução da pressão do ataque.</p></div><a class="btn primary" href="jogo/index.html" target="_blank" rel="noopener">ABRIR SIMULAÇÃO EM TELA CHEIA ↗</a></div>
+ <iframe class="gameframe" src="jogo/index.html" title="Operação Brecha Zero: investigação SOC" loading="lazy"></iframe>
 </section>
 
 <section id="quiz" class="section dark">

@@ -1,14 +1,14 @@
 const state={
- phase:0,risk:72,rep:100,time:120,found:0,actions:0,
+ phase:0,risk:72,rep:100,time:180,found:0,actions:0,
  controls:new Set(),investigated:new Set(),classified:new Set(),fixed:new Set(),
  exfilStopped:false,usedActions:new Set(),selectedFile:null,phaseComplete:false,finished:false
 };
 
 const phases=[
- {label:"FASE 1 // RECONHECIMENTO",title:"Encontre o caminho do invasor",story:"Cruze os alertas para descobrir por onde o invasor entrou.",objective:"Ache a entrada e contenha a ameaça."},
- {label:"FASE 2 // DADOS",title:"Descubra o que está em risco",story:"O invasor acessou o servidor financeiro. Descubra quais arquivos são sensíveis.",objective:"Classifique os dados e identifique os arquivos críticos."},
- {label:"FASE 3 // CONTENÇÃO",title:"Feche as brechas",story:"A entrada foi identificada. Corrija as falhas sem desligar o servidor inteiro.",objective:"Desative o serviço, proteja a conta e ajuste o firewall."},
- {label:"FASE 4 // EXFILTRAÇÃO",title:"Os dados estão saindo",story:"Há dados saindo da rede. Interrompa a transferência e preserve as provas.",objective:"Conter o vazamento e registrar evidências."}
+ {label:"FASE 1 // RECONHECIMENTO",title:"Encontre o caminho do invasor",story:"O SOC recebeu vários sinais ao mesmo tempo. Investigue as fontes e conecte as pistas. Cada ação tem uma finalidade diferente.",objective:"Descubra o vetor de entrada e execute duas contenções úteis."},
+ {label:"FASE 2 // DADOS",title:"Descubra o que está em risco",story:"O invasor alcançou o servidor financeiro. Investigue os arquivos e identifique quais informações exigem maior proteção.",objective:"Classifique os quatro arquivos e identifique os dados sensíveis."},
+ {label:"FASE 3 // CONTENÇÃO",title:"Feche as brechas",story:"Agora você conhece a origem do problema. Corrija as configurações sem derrubar o servidor inteiro.",objective:"Corrija as quatro vulnerabilidades encontradas."},
+ {label:"FASE 4 // EXFILTRAÇÃO",title:"Os dados estão saindo",story:"A transferência começou. Você precisa interromper a exfiltração e preservar a investigação.",objective:"Bloqueie o vazamento e registre evidências."}
 ];
 
 const events=[
@@ -60,37 +60,26 @@ function boot(){
  const overlay=$("boot"),log=$("bootlog"),bar=$("bootbar"),status=$("bootstatus");
  overlay.classList.remove("hidden");log.innerHTML="";
  const lines=[
-  ["[SOC] estação pronta.","cyan"],
-  ["[SIEM] alertas carregados.","ok"],
-  ["[ALERTA] tráfego anômalo detectado.","bad"],
-  ["[ALERTA] possível intrusão no servidor financeiro.","warn"],
-  ["[SOC] investigação iniciada.","ok"]
+  ["[SOC] iniciando estação de resposta...","cyan"],
+  ["[NET] conexão segura estabelecida.","ok"],
+  ["[AUTH] analista autenticado.","ok"],
+  ["[SIEM] carregando eventos de segurança...","cyan"],
+  ["[EDR] 47 ativos encontrados.","ok"],
+  ["[SCAN] varredura de rede iniciada...","warn"],
+  ["[ALERT] tráfego anômalo detectado.","bad"],
+  ["[ALERT] possível intrusão em SRV-FIN-02.","bad"],
+  ["[SOC] incidente escalado para análise humana.","warn"],
+  ["[SYSTEM] ambiente pronto.","ok"]
  ];
  let i=0;
  function next(){
   if(i>=lines.length){bar.style.width="100%";status.textContent="Conexão estabelecida. Entrando no SOC...";setTimeout(()=>{overlay.classList.add("hidden");show("game");render();startClock();flash();},500);return}
   const [txt,kind]=lines[i],d=document.createElement("div");d.className="bootline "+kind;d.textContent=txt;log.appendChild(d);log.scrollTop=log.scrollHeight;
-  bar.style.width=((i+1)/lines.length*100)+"%";status.textContent=txt.replace(/^\[[^\]]+\]\s*/,"");i++;setTimeout(next,120);
+  bar.style.width=((i+1)/lines.length*100)+"%";status.textContent=txt.replace(/^\[[^\]]+\]\s*/,"");i++;setTimeout(next,220);
  }
  next();
 }
-$("enter").addEventListener("click",()=>{show("attackflow");renderAttackFlow();});
-
-const attackStages=[
- {node:0,title:"Reconhecimento detectado",text:"Um IP externo sondou a porta 8080. O servidor mantém ativo um serviço administrativo legado que não é usado há 31 dias.",objective:"Investigue a superfície exposta e reduza serviços desnecessários.",control:"CIS 04.08",choice:"Desativar o serviço legado",log:["[08:41:02] SCAN externo detectado na porta 8080","[08:41:04] serviço legacy-admin responde a requisições","[EVIDÊNCIA] serviço sem uso há 31 dias"]},
- {node:1,title:"A rede permitiu a passagem",text:"A regra de firewall aceita conexões que não são necessárias para a operação. Bloquear apenas o IP pode ajudar, mas a regra permissiva continua sendo um risco.",objective:"Restringir o tráfego de entrada ao necessário.",control:"CIS 04.04",choice:"Restringir a regra do firewall",log:["[08:42:11] conexão externa aceita pela regra FW-ANY-TO-SRV","[ALERTA] origem não consta na lista autorizada","[EVIDÊNCIA] regra ampla permite tráfego desnecessário"]},
- {node:2,title:"A conta administrativa foi comprometida",text:"O login admin veio de um endereço externo e fora do padrão. A conta padrão permaneceu ativa desde a instalação do servidor.",objective:"Eliminar o uso de contas padrão e reduzir o acesso indevido.",control:"CIS 04.07",choice:"Desativar a conta padrão e revisar acessos",log:["[08:43:19] autenticação de admin aceita","[ALERTA] origem 185.77.91.4 fora do padrão","[EVIDÊNCIA] conta padrão ativa e sem revisão recente"]},
- {node:3,title:"Dados sensíveis em risco",text:"A sessão acessou planilhas com dados pessoais e financeiros. Sem classificação, controle de acesso e proteção contra exfiltração, o impacto pode aumentar rapidamente.",objective:"Proteger os dados e interromper a saída não autorizada.",control:"CIS 03.03 / 03.11 / 03.13",choice:"Bloquear a exfiltração e preservar evidências",log:["[08:44:03] leitura de clientes_2026.xlsx","[08:44:07] folha_pagamento.xlsx preparada para envio","[ALERTA] transferência para armazenamento externo"]}
-];
-let attackStage=-1;
-function appendTerminal(lines){const box=$("terminalLines");lines.forEach(line=>{const p=document.createElement("p");p.textContent=line; if(line.includes("ALERTA")||line.includes("EVIDÊNCIA"))p.className="termwarn";else if(line.includes("CONTIDO")||line.includes("CORREÇÃO"))p.className="termgood";box.appendChild(p)});box.scrollTop=box.scrollHeight;}
-function renderAttackFlow(){attackStage=-1;document.querySelectorAll(".pathnode").forEach((n,i)=>n.classList.toggle("active",i===0));$("terminalLines").innerHTML="<p><b>SYSTEM</b> Pronto para iniciar a simulação.</p><p><strong>INFO</strong> O ambiente contém configurações inseguras.</p>";$("stageTitle").textContent="Ataque ainda não iniciado";$("stageText").textContent="Clique em “Executar ataque” para acompanhar cada avanço e descobrir qual controle deveria interrompê-lo.";$("stageObjective").textContent="Relacionar a vulnerabilidade ao CIS 03 ou CIS 04.";$("stageChoices").innerHTML="";$("runAttack").textContent="▶ EXECUTAR ATAQUE";}
-function advanceAttack(){
- if(attackStage<attackStages.length-1){attackStage++;const st=attackStages[attackStage];document.querySelectorAll(".pathnode").forEach((n,i)=>{n.classList.toggle("active",i===attackStage);n.classList.toggle("passed",i<attackStage)});appendTerminal(st.log);$("stageTitle").textContent=st.title;$("stageText").textContent=st.text;$("stageObjective").textContent=st.objective;$("stageChoices").innerHTML=`<div class="controlhint"><b>SALVAGUARDA RELACIONADA</b><span>${st.control}</span></div><button class="flowfix" onclick="applyFlowFix(${attackStage})">${st.choice}</button>`;$("runAttack").textContent=attackStage===attackStages.length-1?"▶ REINICIAR SIMULAÇÃO":"▶ AVANÇAR ATAQUE";return;}
- renderAttackFlow();
-}
-function applyFlowFix(index){const st=attackStages[index];appendTerminal(["[SOC] Correção selecionada: "+st.choice,"[CONTROLE] "+st.control+" relacionado à etapa."]);$("stageText").textContent="Boa decisão. Na investigação completa, valide o impacto da correção, procure sinais de persistência e preserve os registros. A etapa demonstra o controle, mas não substitui a análise do incidente.";$("stageChoices").innerHTML=`<div class="fixresult"><b>✓ AÇÃO REGISTRADA</b><span>${st.control}</span><p>O risco desta etapa foi reduzido. Continue para acompanhar o próximo ponto da cadeia.</p></div>${index===3?`<button class="flowfix" style="margin-top:10px" onclick="boot()">ABRIR INVESTIGAÇÃO COMPLETA NO SOC →</button>`:""}`;}
-$("runAttack").addEventListener("click",advanceAttack);
+$("enter").addEventListener("click",boot);
 
 function render(){
  const p=phases[state.phase];
@@ -199,7 +188,7 @@ function checkPhase1(){ completePhase(); }
 /* PHASE 2 */
 function phase2(type){
  if(type!=="data"){
-  $("panel").innerHTML=`<div class="detail"><h3>🔎 FASE DE DADOS</h3><p>Use o painel <b>DADOS</b> para investigar os arquivos. Classifique pelo menos três arquivos; os outros sensores mostram o contexto do incidente.</p><div class="log">ACESSO DETECTADO → /clientes/2026<br>ARQUIVOS POTENCIALMENTE SENSÍVEIS → 4<br>EXFILTRAÇÃO → ainda não iniciada</div></div>`;
+  $("panel").innerHTML=`<div class="detail"><h3>🔎 FASE DE DADOS</h3><p>Use o painel <b>DADOS</b> para investigar os arquivos. Os outros sensores mostram o contexto do incidente.</p><div class="log">ACESSO DETECTADO → /clientes/2026<br>ARQUIVOS POTENCIALMENTE SENSÍVEIS → 4<br>EXFILTRAÇÃO → ainda não iniciada</div></div>`;
   return;
  }
  $("panel").innerHTML=`<div class="detail"><h3>▤ ARQUIVOS ENCONTRADOS</h3><p>Selecione um arquivo. Leia os metadados e decida onde ele deve ficar.</p>
@@ -217,7 +206,7 @@ function classify(bucket){
  const f=files[id];
  if(bucket!==f.correct){rep(-5);risk(5);toast("⚠️ Essa classificação não combina com a informação descrita.","bad");return}
  state.classified.add(id);state.found++;rep(4);risk(-4);use("CIS 03.07");addFeed("DADO CLASSIFICADO: "+f.name,"green");toast("Classificação registrada. CIS 03.07.","good");renderPanel("data");
- if(state.classified.size>=3)completePhase();
+ if(state.classified.size===4)completePhase();
 }
 
 /* PHASE 3 */
@@ -249,7 +238,7 @@ function applyConfig(type){
  const map={service:"CIS 04.08",account:"CIS 04.07",firewall:"CIS 04.04",crypto:"CIS 03.11"};
  if(state.fixed.has(type))return;
  state.fixed.add(type);state.actions++;use(map[type]);risk(-10);rep(7);addFeed("CONFIGURAÇÃO CORRIGIDA: "+map[type],"green");toast(map[type]+" aplicado.","good");renderPanel("assets");
- if(["service","account","firewall"].every(x=>state.fixed.has(x)))completePhase();
+ if(["service","account","firewall","crypto"].every(x=>state.fixed.has(x)))completePhase();
 }
 function delayConfig(type){
  const key="delay_"+type;
@@ -289,10 +278,10 @@ function respond(type){
 /* COMMON */
 function canAdvance(){
  if(state.phase===0){
-   return state.fixed.has("service") && state.fixed.has("account") && state.investigated.size>=2;
+   return state.fixed.has("service") && state.fixed.has("account") && state.investigated.size>=3;
  }
- if(state.phase===1) return state.classified.size>=3;
- if(state.phase===2) return ["service","account","firewall"].every(x=>state.fixed.has(x));
+ if(state.phase===1) return state.classified.size===4;
+ if(state.phase===2) return ["service","account","firewall","crypto"].every(x=>state.fixed.has(x));
  if(state.phase===3) return state.exfilStopped;
  return false;
 }
@@ -355,9 +344,8 @@ function finish(){
  clearInterval(window.timer);show("end");
  $("finalRep").textContent=state.rep;$("evfound").textContent=state.found;$("actions").textContent=state.actions;$("controls").textContent=state.controls.size;
  $("controlchips").innerHTML=[...state.controls].map(x=>`<span>${x}</span>`).join("");
- if(state.exfilStopped&&state.risk<=35&&state.usedActions.has("response_logs")){$("finalTitle").textContent="INCIDENTE CONTIDO";$("finalText").textContent="Você conectou as pistas, corrigiu as principais brechas, bloqueou a exfiltração e preservou os logs para investigar o alcance do incidente."}
- else if(state.exfilStopped&&state.usedActions.has("response_logs")){$("finalTitle").textContent="ATAQUE INTERROMPIDO";$("finalText").textContent="A transferência foi interrompida e as evidências foram preservadas, mas algumas vulnerabilidades permaneceram abertas."}
- else if(state.exfilStopped){$("finalTitle").textContent="VAZAMENTO INTERROMPIDO, INVESTIGAÇÃO INCOMPLETA";$("finalText").textContent="Você bloqueou a transferência, mas não preservou os logs. Sem evidências, descobrir o que foi acessado e por quanto tempo fica mais difícil."}
+ if(state.exfilStopped&&state.risk<=35){$("finalTitle").textContent="INCIDENTE CONTIDO";$("finalText").textContent="Você conectou as pistas, corrigiu as principais brechas e bloqueou a exfiltração. O SOC preservou evidências para a investigação."}
+ else if(state.exfilStopped){$("finalTitle").textContent="ATAQUE INTERROMPIDO";$("finalText").textContent="A exfiltração foi interrompida, mas algumas vulnerabilidades permaneceram abertas."}
  else{$("finalTitle").textContent="DADOS COMPROMETIDOS";$("finalText").textContent="O ataque avançou mais rápido que a resposta. A investigação encontrou pistas, mas o vazamento não foi contido."}
 }
 
@@ -365,106 +353,3 @@ function finish(){
 document.addEventListener("DOMContentLoaded",()=>{
  if(!$("enter"))return;
 });
-
-/* ================= DIDÁTICA v6 ================= */
-const knowledge=[
- ['03.01','Processo de gestão de dados','Definir regras para coletar, usar, armazenar, compartilhar e proteger dados.','Governança de dados'],
- ['03.02','Inventário de dados','Saber quais dados existem, onde estão e quem é responsável por eles.','Visibilidade'],
- ['03.03','Listas de controle de acesso','Definir quem pode acessar cada dado e em quais condições.','Permissões'],
- ['03.04','Retenção de dados','Manter dados somente pelo tempo necessário e definido pela organização.','Ciclo de vida'],
- ['03.05','Descarte seguro','Eliminar dados de forma que não possam ser recuperados indevidamente.','Descarte'],
- ['03.06','Criptografia em dispositivos finais','Proteger dados armazenados em notebooks, desktops e outros endpoints.','Dados em dispositivo'],
- ['03.07','Classificação de dados','Rotular dados por sensibilidade para aplicar proteção proporcional ao risco.','Público / interno / confidencial'],
- ['03.08','Fluxos de dados','Documentar por onde os dados passam, de onde vêm e para onde vão.','Movimentação'],
- ['03.09','Mídias removíveis','Criptografar dados armazenados em pendrives e outras mídias removíveis.','USB / mídia'],
- ['03.10','Dados em trânsito','Criptografar dados enquanto trafegam por redes.','Comunicação'],
- ['03.11','Dados em repouso','Criptografar dados enquanto estão armazenados.','Servidor / armazenamento'],
- ['03.12','Segmentação por sensibilidade','Separar processamento e armazenamento conforme o nível de sensibilidade.','Segmentação'],
- ['03.13','Prevenção contra perda de dados','Detectar e impedir transferências indevidas de dados sensíveis.','DLP'],
- ['03.14','Registro de acesso a dados sensíveis','Registrar quem acessou dados sensíveis, quando e o que aconteceu.','Auditoria'],
- ['04.01','Processo de configuração segura','Criar e manter padrões seguros para ativos e softwares.','Baseline'],
- ['04.02','Configuração segura de rede','Aplicar padrões seguros também à infraestrutura de rede.','Rede'],
- ['04.03','Bloqueio automático de sessão','Bloquear sessões após período de inatividade.','Tela / sessão'],
- ['04.04','Firewall em servidores','Controlar conexões de rede permitidas e bloquear as desnecessárias.','Firewall'],
- ['04.05','Firewall em dispositivos finais','Controlar conexões nos computadores e endpoints dos usuários.','Endpoint'],
- ['04.06','Gestão segura de ativos e software','Administrar ativos e softwares de maneira controlada e segura.','Gestão'],
- ['04.07','Contas padrão','Gerenciar, desativar ou remover contas padrão desnecessárias.','Identidade'],
- ['04.08','Serviços desnecessários','Desinstalar ou desativar serviços que não são necessários.','Superfície de ataque'],
- ['04.09','DNS confiável','Configurar dispositivos para usar servidores DNS confiáveis.','Resolução de nomes'],
- ['04.10','Bloqueio automático de dispositivo portátil','Bloquear automaticamente dispositivos portáteis após período definido.','Notebook / celular'],
- ['04.11','Apagamento remoto','Permitir apagar dados de dispositivos portáteis remotamente quando necessário.','Resposta a perda/roubo'],
- ['04.12','Workspace corporativo separado','Separar o ambiente corporativo do ambiente pessoal em dispositivos móveis.','BYOD / MDM']
-];
-
-function setExplainer(title,text,tag='GUIA DO SOC'){
- const a=$('exTitle'),b=$('exText'),c=$('exTag');if(a)a.textContent=title;if(b)b.textContent=text;if(c)c.textContent=tag;
-}
-function explanation(title,foundText,why,action,cis,result){
- let old=document.getElementById('explainModal');if(old)old.remove();
- const m=document.createElement('div');m.id='explainModal';m.className='explainmodal';
- m.innerHTML=`<div class="exbox"><div class="exhead"><div class="tag">${cis||'CONCEITO SOC'}</div><h3>${title}</h3></div><div class="exbody"><div class="exrow"><b>🔎 O QUE VOCÊ ENCONTROU</b><p>${foundText}</p></div><div class="exrow"><b>🧠 POR QUE ISSO IMPORTA</b><p>${why}</p></div><div class="exrow"><b>🛡️ O QUE SUA AÇÃO FAZ</b><p>${action}</p></div><div class="exrow excis"><b>📘 CIS EM LINGUAGEM SIMPLES</b><p>${cis} ${result||''}</p></div><button class="exclose" onclick="closeExplanation()">ENTENDI, CONTINUAR →</button></div></div>`;
- document.body.appendChild(m);
-}
-function closeExplanation(){const m=$('explainModal');if(m)m.remove()}
-
-const _renderPanelV6=renderPanel;
-renderPanel=function(type){_renderPanelV6(type);updateExplainer(type)};
-function updateExplainer(type){
- const contexts={
-  events:['EVENTOS: primeiro descubra o que aconteceu.','Um evento isolado é só um sinal. Vários sinais relacionados formam uma hipótese de incidente.'],
-  network:['REDE: observe origem, destino e direção.','Uma conexão externa inesperada pode indicar reconhecimento, comando ou saída de dados.'],
-  assets:['ATIVOS: descubra qual máquina está envolvida.','Serviços e portas abertas aumentam a superfície de ataque. O objetivo é entender o ativo antes de mexer nele.'],
-  users:['USUÁRIOS: investigue a identidade por trás da ação.','Uma conta administrativa previsível ou usada fora do padrão pode facilitar o acesso indevido.'],
-  data:['DADOS: nem toda informação tem o mesmo risco.','Classificação e proteção dependem da sensibilidade do conteúdo, não do tamanho do arquivo.']
- };
- const c=contexts[type]||contexts.events;setExplainer(c[0],c[1],`FASE ${state.phase+1} • EXPLICAÇÃO`);
-}
-
-const _openEventV6=openEvent;
-openEvent=function(id){
- const before=state.investigated.size;_openEventV6(id);
- if(state.investigated.size===before)return;
- const e=events.find(x=>x.id===id);
- const map={scan:['Uma máquina externa sondou a porta 8080 do servidor financeiro.','Varredura é uma forma comum de reconhecimento. O atacante está tentando descobrir serviços expostos.','Registrar e correlacionar o evento cria evidência para investigar o caminho do ataque.','CIS 04.02','configuração segura da infraestrutura de rede ajuda a reduzir exposições desnecessárias.'],login:['A conta administrativa aceitou um login vindo de um IP externo.','A identidade usada pelo invasor pode ser mais importante que o primeiro alerta de rede.','Investigar o usuário permite relacionar a ação ao mecanismo de autenticação.','CIS 04.07','contas padrão ou desnecessárias devem ser gerenciadas com segurança.'],data:['A pasta de clientes foi acessada por uma sessão administrativa.','Dados pessoais podem causar impacto elevado se forem expostos.','Identificar o acesso ajuda a determinar quais dados precisam de proteção e rastreabilidade.','CIS 03.14','acessos a dados sensíveis devem gerar registros para auditoria.'],traffic:['O servidor iniciou uma conexão para um endereço externo.','A direção do tráfego importa: dados saindo da rede podem indicar exfiltração.','Correlacionar a conexão com outros eventos ajuda a confirmar o incidente.','CIS 03.08','documentar fluxos de dados ajuda a reconhecer movimentações anormais.']}[id];
- explanation(e.title,map[0],map[1],map[2],map[3],map[4]);
-};
-
-const _investigateNetworkV6=investigateNetwork;
-investigateNetwork=function(){const before=state.investigated.size;_investigateNetworkV6();if(state.investigated.size===before)return;explanation('Rede correlacionada','Os logs mostram uma sondagem externa na porta 8080 e conexões de saída do servidor financeiro.','A sequência reconhecimento → acesso → conexão externa é mais forte que qualquer evento isolado.','Você registrou a evidência para usar essa correlação na resposta.','CIS 03.08','documentar fluxos de dados ajuda a entender por onde a informação circula.');};
-
-const _investigateDataV6=investigateData;
-investigateData=function(){const before=state.investigated.size;_investigateDataV6();if(state.investigated.size===before)return;explanation('Dados identificados','A pasta contém dados pessoais, informações comerciais e material público.','O nível de proteção deve acompanhar a sensibilidade da informação.','Você marcou o conjunto como evidência para continuar a análise.','CIS 03.02','um inventário permite saber que dados existem e onde estão.');};
-
-const _inspectAssetV6=inspectAsset;
-inspectAsset=function(id){const before=state.investigated.size;_inspectAssetV6(id);if(id!=='fin'||state.investigated.size===before)return;explanation('Serviço legado encontrado','O SRV-FIN-02 mantém o serviço legacy-admin ativo, com porta 8080 exposta e sem uso há 31 dias.','Serviço desnecessário é uma porta adicional para ataque. Se não tem função, não deveria ficar esperando um invasor encontrar.','Você identificou a configuração que precisa ser corrigida na contenção.','CIS 04.08','desinstalar ou desativar serviços desnecessários reduz a superfície de ataque.');};
-
-const _inspectUserV6=inspectUser;
-inspectUser=function(){const before=state.investigated.size;_inspectUserV6();if(state.investigated.size===before)return;explanation('Conta administrativa suspeita','A conta admin é previsível, foi criada na instalação e aceitou um login externo fora do padrão.','Contas padrão conhecidas podem ser alvos fáceis. Identidade também faz parte da superfície de ataque.','Você investigou a conta antes de decidir se ela deve ser desativada.','CIS 04.07','contas padrão devem ser gerenciadas e desativadas quando não forem necessárias.');};
-
-const _disableLegacyV6=disableLegacy;
-disableLegacy=function(){if(state.fixed.has('service'))return;_disableLegacyV6();explanation('Serviço desnecessário desativado','O serviço legacy-admin não era usado há 31 dias e estava exposto pela porta 8080.','Cada serviço desnecessário aumenta a quantidade de código e portas que podem ser explorados.','A correção remove o serviço do caminho do ataque sem desligar o servidor financeiro inteiro.','CIS 04.08','se não é necessário, desative. Segurança adora coisas que não estão rodando sem motivo.');};
-
-const _disableAdminV6=disableAdmin;
-disableAdmin=function(){if(state.fixed.has('account'))return;_disableAdminV6();explanation('Conta padrão desativada','A conta admin tinha características de uma conta padrão e foi usada em um login suspeito.','Uma conta previsível com privilégios elevados pode facilitar persistência e abuso.','A desativação impede que essa identidade continue sendo usada como caminho de acesso.','CIS 04.07','gerenciar ou desativar contas padrão reduz oportunidades de abuso.');};
-
-const _blockIPV6=blockIP;
-blockIP=function(){const already=state.fixed.has('ip');_blockIPV6();if(already)return;explanation('Conexão externa bloqueada','O endereço externo observado estava relacionado ao tráfego suspeito.','O firewall pode cortar o canal de comunicação, mas isso não classifica nem criptografa dados.','Você interrompeu a conexão de rede identificada como suspeita.','CIS 04.04','firewall controla quais conexões são permitidas.');};
-
-const _classifyV6=classify;
-classify=function(bucket){const id=state.selectedFile;if(!id||state.classified.has(id))return;const f=files[id];const correct=bucket===f.correct;_classifyV6(bucket);if(!correct)return;const labels={pub:'PÚBLICO',int:'INTERNO',conf:'CONFIDENCIAL'};explanation('Classificação aplicada',`${f.name} contém: ${f.desc}. Foi classificado como ${labels[bucket]}.`,'Classificação permite aplicar controles proporcionais ao impacto de uma exposição. Um catálogo público não exige o mesmo tratamento que folha de pagamento.','Você associou o arquivo a um nível de sensibilidade para orientar a proteção.','CIS 03.07','classificar dados significa identificar sua sensibilidade e usar essa informação para protegê-los.');};
-
-const _applyConfigV6=applyConfig;
-applyConfig=function(type){const map={service:['CIS 04.08','Serviço desnecessário desativado.','Reduz a superfície de ataque sem desligar o servidor.'],account:['CIS 04.07','Conta padrão desativada.','Remove uma identidade previsível do caminho de acesso.'],firewall:['CIS 04.04','Firewall configurado.','Restringe conexões de entrada desnecessárias.'],crypto:['CIS 03.11','Criptografia em repouso ativada.','Protege os dados mesmo quando o armazenamento é acessado indevidamente.']};if(state.fixed.has(type))return;_applyConfigV6(type);const m=map[type];explanation(m[1],`A configuração ${type} estava marcada como insegura.`,'Configuração segura reduz caminhos previsíveis de exploração e limita o impacto de um comprometimento.','Você aplicou a correção específica sem derrubar todo o ambiente.',''+m[0],m[2]);};
-
-const _respondV6=respond;
-respond=function(type){const before=state.exfilStopped;_respondV6(type);if(type==='dlp'&&!before)explanation('DLP bloqueou a exfiltração','O sistema detectou uma tentativa de enviar arquivos sensíveis para armazenamento externo.','DLP atua sobre o movimento de dados, não apenas sobre a conexão de rede.','A transferência foi interrompida antes de completar o vazamento.','CIS 03.13','DLP detecta e pode impedir movimentações indevidas de dados sensíveis.');
- else if(type==='firewall'&&!state.usedActions.has('__dummy__'))explanation('Firewall bloqueou o canal','A conexão externa estava ativa durante a tentativa de exfiltração.','Bloquear a comunicação pode interromper o canal usado pelo atacante, mas não substitui controles de dados.','Você cortou a conexão de rede suspeita.','CIS 04.04','firewall controla conexões de rede permitidas.');
- else if(type==='logs'&&state.usedActions.has('response_logs'))explanation('Evidências preservadas','Os registros da atividade do incidente foram preservados.','Sem logs, a equipe pode até conter o ataque, mas perde contexto para descobrir o que aconteceu.','Você manteve os registros para investigação e auditoria.','CIS 03.14','registrar acessos a dados sensíveis ajuda a reconstruir o incidente.');};
-
-const knowledgeGrid=$('knowledgeGrid');
-function openKnowledge(){renderKnowledge('all');$('knowledge').classList.remove('hidden')}
-function closeKnowledge(){$('knowledge').classList.add('hidden')}
-function renderKnowledge(filter){if(!knowledgeGrid)return;knowledgeGrid.innerHTML=knowledge.filter(x=>filter==='all'||x[0].startsWith(filter)).map(x=>`<div class="kcard"><div class="kcode">CIS ${x[0]}</div><h4>${x[1]}</h4><p>${x[2]}</p><small>Foco: ${x[3]}</small></div>`).join('')}
-function filterKnowledge(filter,btn){document.querySelectorAll('.kfilter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderKnowledge(filter)}
-
-setExplainer('O QUE ESTÁ ACONTECENDO?','Leia os sinais antes de agir. Investigar significa encontrar relações entre eventos, ativos, usuários e dados.','GUIA DO SOC');

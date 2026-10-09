@@ -219,3 +219,28 @@ body{font-size:18px}
 
 /* Ajustes de navegação completa e salvaguardas clicáveis nos casos reais */
 .navbar nav{gap:1px;flex:1;justify-content:center;min-width:0;overflow-x:auto;scrollbar-width:thin;white-space:nowrap;margin:0 14px}.navbar nav button{flex:0 0 auto;padding:9px 8px;font-size:10px!important}.navbar{gap:10px}.case-controls{margin-top:12px}.case-controls>b{margin:9px 0 6px!important}.cis-chip-row{display:flex;flex-wrap:wrap;gap:6px}.cis-detail{display:inline-block;vertical-align:top;max-width:100%;margin:2px 0}.cis-detail summary{cursor:pointer;list-style:none;padding:6px 8px;border:1px solid rgba(25,207,255,.32);color:var(--blue);background:rgba(25,207,255,.06);font:10px "JetBrains Mono"}.cis-detail summary::-webkit-details-marker{display:none}.cis-detail summary:after{content:' +';color:var(--orange)}.cis-detail[open] summary:after{content:' −'}.cis-detail p{min-width:180px;max-width:250px;padding:8px!important;margin:0!important;background:#0b1821;border:1px solid var(--border);font-size:11px!important;line-height:1.5!important;color:#d4e2e8!important}.case-grid>div{min-width:0;overflow-wrap:anywhere}.section{scroll-margin-top:78px}@media(max-width:1100px){.navbar nav{display:flex;justify-content:flex-start}.status{display:none}.navbar{padding:0 3%}.logo small{display:none}}@media(max-width:700px){.navbar{height:64px}.navbar nav button{font-size:9px!important;padding:8px 7px}.logo-icon{width:30px;height:30px}.case-grid{grid-template-columns:1fr}}
+
+
+/* Dinâmica visual do ataque na landing page: separada do jogo SOC */
+.attackflow-landing{position:relative}
+.attackflow-intro{max-width:900px;color:var(--muted);line-height:1.8;margin:-22px 0 22px}
+.attackflow-landing .attack-map{max-width:1000px;margin:30px auto;gap:12px}
+.attackflow-landing .node{min-width:0;flex:1;height:125px;padding:12px;text-align:center;gap:8px;transition:border-color .25s,background .25s,transform .25s}
+.attackflow-landing .node>b{font-size:11px}
+.attackflow-landing .node span{font-size:11px;color:#c6d5dc}
+.attackflow-landing .node small{font:9px ui-monospace,monospace}
+.attackflow-landing .node.active-stage{border-color:var(--green);background:rgba(50,230,154,.09);color:var(--green);transform:translateY(-3px);box-shadow:0 0 20px rgba(50,230,154,.08)}
+.attackflow-workspace{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:18px;max-width:1100px;margin:28px auto 0;align-items:stretch}
+.attackflow-terminal{max-width:none;margin:0;min-height:300px;display:flex;flex-direction:column}
+.attackflow-terminal .console-top{flex-shrink:0}
+.attackflow-terminal #consoleOutput{height:220px;flex:1}
+.attack-next{align-self:flex-start;margin-top:12px}
+.attack-explanation{padding:24px;background:var(--card);border:1px solid var(--border);min-width:0}
+.attack-explanation>small{font:9px ui-monospace,monospace;letter-spacing:1.5px;color:var(--blue)}
+.attack-explanation h3{font-size:clamp(22px,2.5vw,30px);line-height:1.2;margin:14px 0}
+.attack-explanation p{color:var(--muted);font-size:13px;line-height:1.7}
+.attack-explanation .control-link{display:grid;gap:8px;margin-top:22px;padding:14px;background:rgba(25,207,255,.05);border:1px solid rgba(25,207,255,.15)}
+.attack-explanation .control-link strong{color:var(--blue);font:10px ui-monospace,monospace}
+.attack-explanation .control-link span{color:#c7d5dd;font-size:12px;line-height:1.6}
+.attackflow-note{max-width:1100px;margin:18px auto 0;color:var(--muted);font-size:12px;line-height:1.6}
+@media(max-width:760px){.attackflow-landing .attack-map{gap:5px;align-items:stretch}.attackflow-landing .node{height:112px;padding:8px 3px;gap:6px}.attackflow-landing .node>b{font-size:8px}.attackflow-landing .node span{font-size:8px}.attackflow-landing .node small{font-size:7px;overflow-wrap:anywhere}.attackflow-landing .attack-map>i{font-size:15px;align-self:center;transform:none}.attackflow-workspace{grid-template-columns:1fr}.attackflow-explanation{padding:18px}.attackflow-terminal #consoleOutput{height:190px}}

@@ -32,27 +32,12 @@
   <div class="hero">
     <div class="kicker">SIMULAÇÃO DE INCIDENTE • MODO INVESTIGAÇÃO</div>
     <h1>OPERAÇÃO<br><span>BRECHA ZERO</span></h1>
-    <p>Ataque em andamento. Investigue os alertas, encontre as falhas e impeça o roubo de dados.</p>
+    <p>Uma empresa está sofrendo um ataque. Você é o analista do SOC. Investigue os sinais, conecte as pistas e impeça que dados sensíveis sejam roubados.</p>
     <div class="heroicons">
       <span>◉ INVESTIGAR</span><span>⌁ CORRELACIONAR</span><span>◆ REAGIR</span>
     </div>
     <button id="enter" class="primary">ENTRAR NO SOC</button>
-    <small>4 fases • investigue • corrija • contenha</small>
-  </div>
-</section>
-
-<section id="attackflow" class="screen">
-  <div class="flowhead"><span class="flow-num">07</span><div class="kicker">SIMULAÇÃO DE ATAQUE</div><h1>O ataque <span>começou.</span></h1>
-    <p>Observe como uma configuração insegura permite que o atacante avance. Em cada etapa, investigue as evidências e identifique qual salvaguarda poderia impedir ou limitar o avanço.</p></div>
-  <div class="attackpath" aria-label="Progressão do ataque">
-    <div class="pathnode active" id="node0"><b>☷</b><strong>ATACANTE</strong><span>Reconhecimento</span><small>CIS 04.08</small></div><i>→</i>
-    <div class="pathnode" id="node1"><b>◎</b><strong>REDE</strong><span>Firewall permissivo</span><small>CIS 04.04 / 04.05</small></div><i>→</i>
-    <div class="pathnode" id="node2"><b>▤</b><strong>SERVIDOR</strong><span>Acesso obtido</span><small>CIS 04.01 / 04.07</small></div><i>→</i>
-    <div class="pathnode data" id="node3"><b>▣</b><strong>DADOS</strong><span>Informação sensível</span><small>CIS 03.03 / 03.11 / 03.13</small></div>
-  </div>
-  <div class="flowworkspace">
-    <div class="terminal"><div class="terminaltop"><span>● ● ●</span><small>ATTACK_SIMULATION.EXE</small></div><div id="terminalLines" class="terminal-lines"><p><b>SYSTEM</b> Pronto para iniciar a simulação.</p><p><strong>INFO</strong> O ambiente contém configurações inseguras.</p></div><button id="runAttack" class="runattack">▶ EXECUTAR ATAQUE</button></div>
-    <aside class="stageanalysis"><small>ANÁLISE DA ETAPA</small><h2 id="stageTitle">Ataque ainda não iniciado</h2><p id="stageText">Clique em “Executar ataque” para acompanhar cada avanço e descobrir qual controle deveria interrompê-lo.</p><hr><b>OBJETIVO</b><p id="stageObjective">Relacionar a vulnerabilidade ao CIS 03 ou CIS 04.</p><div id="stageChoices" class="stagechoices"></div></aside>
+    <small>4 fases • investigação livre • funciona no celular</small>
   </div>
 </section>
 
@@ -83,7 +68,6 @@
       <button class="nav" data-panel="assets">▣ ATIVOS</button>
       <button class="nav" data-panel="users">♙ USUÁRIOS</button>
       <button class="nav" data-panel="data">▤ DADOS</button>
-      <button class="nav knowledge" onclick="openKnowledge()">▦ CENTRAL DE CONHECIMENTO</button>
       <div class="miniobjective"><b>OBJETIVO</b><span id="objective"></span>
        <button id="continueBtn" class="continue hidden">CONTINUAR →</button>
      </div>
@@ -94,7 +78,6 @@
         <span id="panelTitle">EVENTOS EM TEMPO REAL</span>
         <span id="live">● LIVE</span>
       </div>
-      <div id="explainer" class="explainer"><div><b id="exTitle">O QUE ESTÁ ACONTECENDO?</b><span id="exTag">GUIA DO SOC</span></div><p id="exText">Leia os sinais antes de agir. No SOC, clicar em tudo não é investigação, embora pareça ser o esporte favorito da humanidade.</p></div>
       <div id="panel"></div>
     </main>
   </div>
@@ -117,15 +100,6 @@
     <button class="primary" onclick="location.reload()">NOVA OPERAÇÃO</button>
   </div>
 </section>
-</div>
-
-<div id="knowledge" class="overlay hidden">
-  <div class="knowledgebox">
-    <div class="knowledgehead"><span>▦ CENTRAL DE CONHECIMENTO // CIS 03 + CIS 04</span><button onclick="closeKnowledge()">FECHAR ×</button></div>
-    <p class="knowledgeintro">Consulte os 26 safeguards em linguagem simples. Esta central explica o conceito, mas não entrega a solução da fase atual.</p>
-    <div class="knowledgefilters"><button class="kfilter active" onclick="filterKnowledge('all',this)">TODOS</button><button class="kfilter" onclick="filterKnowledge('03',this)">CIS 03 • DADOS</button><button class="kfilter" onclick="filterKnowledge('04',this)">CIS 04 • CONFIGURAÇÃO</button></div>
-    <div id="knowledgeGrid" class="knowledgegrid"></div>
-  </div>
 </div>
 <script src="script.js"></script>
 </body>
