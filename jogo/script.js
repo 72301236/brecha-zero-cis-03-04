@@ -1,5 +1,5 @@
 const state={
- phase:0,risk:72,rep:100,time:180,found:0,actions:0,
+ phase:0,risk:72,rep:100,time:120,found:0,actions:0,
  controls:new Set(),investigated:new Set(),classified:new Set(),fixed:new Set(),
  exfilStopped:false,usedActions:new Set(),selectedFile:null,phaseComplete:false,finished:false
 };
