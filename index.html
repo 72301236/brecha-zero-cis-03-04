@@ -255,19 +255,98 @@
 </section>
 
 <section class="section" id="caso-pratico">
-  <div class="section-title"><span class="red">06</span><div><small>CASO PRÁTICO 01 · DIAGNÓSTICO</small><h2>Identifique as <em class="redtxt">falhas de configuração.</em></h2></div></div>
-  <p class="section-lead">Depois de conhecer as ferramentas do Controle 04, aplique o que aprendeu: investigue cada cartão, identifique o risco e revele a salvaguarda relacionada. Em seguida, veja como essas falhas podem se combinar no cenário seguinte.</p>
+  <div class="section-title">
+    <span class="red">06</span>
+    <div>
+      <small>CASO PRÁTICO 01 · DIAGNÓSTICO</small>
+      <h2>Análise de <em class="redtxt">falhas de configuração.</em></h2>
+    </div>
+  </div>
+
+  <p class="section-lead">
+    Depois de conhecer as ferramentas do Controle 04, aplique o que aprendeu:
+    observe cada situação apresentada nos cartões e tente identificar o risco
+    que ela representa para a empresa. Depois, vire o cartão para conferir a
+    explicação e a salvaguarda do CIS Control 04 relacionada ao problema.
+    No próximo caso, veremos como essas falhas podem se combinar e facilitar um ataque.
+  </p>
+
   <div class="flip-grid four">
-    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b>🔑</b><h3>Conta padrão</h3><p>Credencial administrativa previsível.</p><label>INVESTIGAR</label></div><div class="back"><span>RISCO</span><h3>Privilégio indevido</h3><p>Contas padrão devem ser desabilitadas ou tornadas inutilizáveis.</p><strong>CIS 04.7</strong></div></div></div>
-    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b>🔥</b><h3>Firewall</h3><p>Conexões sem controle adequado.</p><label>INVESTIGAR</label></div><div class="back"><span>RISCO</span><h3>Superfície exposta</h3><p>Firewall deve permitir somente conexões justificadas.</p><strong>CIS 04.4 / 04.5</strong></div></div></div>
-    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b>⚙️</b><h3>Serviços</h3><p>Serviços antigos continuam ativos.</p><label>INVESTIGAR</label></div><div class="back"><span>RISCO</span><h3>Superfície desnecessária</h3><p>Serviços não utilizados devem ser removidos ou desabilitados.</p><strong>CIS 04.8</strong></div></div></div>
-    <div class="flip-card" onclick="flip(this)"><div class="flip-inner"><div class="front"><b>🛡️</b><h3>Hardening</h3><p>Não existia baseline.</p><label>INVESTIGAR</label></div><div class="back"><span>SOLUÇÃO</span><h3>CIS Benchmarks</h3><p>Benchmarks fornecem recomendações prescritivas para configurar tecnologias de forma segura.</p><strong>CIS 04.1</strong></div></div></div>
+
+    <div class="flip-card" onclick="flip(this)">
+      <div class="flip-inner">
+        <div class="front">
+          <b>🔑</b>
+          <h3>Conta padrão</h3>
+          <p>Credencial administrativa previsível.</p>
+          <label>IDENTIFIQUE O RISCO</label>
+        </div>
+        <div class="back">
+          <span>RISCO</span>
+          <h3>Privilégio indevido</h3>
+          <p>Uma conta padrão ativa pode permitir acesso administrativo não autorizado. Ela deve ser desabilitada ou tornada inutilizável.</p>
+          <strong>CIS 04.7</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" onclick="flip(this)">
+      <div class="flip-inner">
+        <div class="front">
+          <b>🔥</b>
+          <h3>Firewall</h3>
+          <p>Conexões sem controle adequado.</p>
+          <label>IDENTIFIQUE O RISCO</label>
+        </div>
+        <div class="back">
+          <span>RISCO</span>
+          <h3>Superfície exposta</h3>
+          <p>Regras permissivas podem permitir conexões não autorizadas. O firewall deve liberar somente comunicações justificadas.</p>
+          <strong>CIS 04.4 / 04.5</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" onclick="flip(this)">
+      <div class="flip-inner">
+        <div class="front">
+          <b>⚙️</b>
+          <h3>Serviços</h3>
+          <p>Serviços antigos continuam ativos.</p>
+          <label>IDENTIFIQUE O RISCO</label>
+        </div>
+        <div class="back">
+          <span>RISCO</span>
+          <h3>Superfície desnecessária</h3>
+          <p>Serviços desatualizados ou desnecessários podem apresentar vulnerabilidades. Os que não são utilizados devem ser removidos ou desabilitados.</p>
+          <strong>CIS 04.8</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" onclick="flip(this)">
+      <div class="flip-inner">
+        <div class="front">
+          <b>🛡️</b>
+          <h3>Hardening</h3>
+          <p>Não existia uma configuração segura padronizada.</p>
+          <label>IDENTIFIQUE O RISCO</label>
+        </div>
+        <div class="back">
+          <span>RISCO</span>
+          <h3>Configuração inconsistente</h3>
+          <p>Sem uma baseline segura, os sistemas podem manter configurações inadequadas. Os CIS Benchmarks ajudam a estabelecer padrões seguros.</p>
+          <strong>CIS 04.1</strong>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <section class="section practical">
   <div class="section-title"><span>07</span><div><small>CASO PRÁTICO 02 · APLICAÇÃO</small><h2>Como as falhas podem <em class="orangetxt">permitir um ataque.</em></h2></div></div>
-  <p class="section-lead">No primeiro caso, identificamos falhas isoladas. Agora, veja como elas podem se combinar em um servidor legado e quais medidas interrompem essa cadeia de risco.</p>
+  <p class="section-lead">No primeiro caso, identificamos falhas isoladas. Agora, veja como elas podem se combinar em um cenário de ataque.</p>
   <div class="scenario">
     <div class="scenario-head"><span>CASO FICTÍCIO • UMA EMPRESA</span><b>VULNERABILIDADE EXPLORADA</b></div>
     <h3>Um servidor legado mantém Telnet ativo, uma conta padrão com senha conhecida e uma regra de firewall permissiva.</h3>
