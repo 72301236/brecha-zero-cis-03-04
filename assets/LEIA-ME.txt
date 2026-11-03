@@ -1,0 +1,2 @@
+As imagens são carregadas por URLs externas no trecho HTML da pasta principal.
+Esta pasta assets foi mantida para combinar com a estrutura sugerida anteriormente, mas não contém cópias locais das fotos.
