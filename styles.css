@@ -294,72 +294,68 @@ body{font-size:18px}
   }
 }
 
-/* QR CODE AO LADO DO RADAR */
-.hero-visual {
-    position: relative;
-}
-
+/* QR CODE ABAIXO DO RADAR */
 .hero-qr {
     position: absolute;
-    top: calc(50% + 175px);
-    right: 50%;
-    transform: translateX(50%);
+    top: calc(50% + 180px);
+    right: 8%;
+    left: auto;
+    transform: none;
 
     display: flex;
     align-items: center;
-    gap: 12px;
-    width: 310px;
-    padding: 10px 14px;
-    margin: 0;
+    gap: 16px;
 
-    background: rgba(8, 20, 28, 0.95);
-    border: 1px solid rgba(0, 217, 255, 0.35);
-    border-radius: 8px;
+    width: 370px;
+    padding: 16px;
+
+    background: rgba(8, 20, 28, 0.96);
+    border: 1px solid rgba(0, 217, 255, 0.45);
+    border-radius: 10px;
     z-index: 5;
+    margin: 0;
 }
 
 .hero-qr-image {
     background: #fff;
-    padding: 5px;
-    border-radius: 4px;
+    padding: 7px;
+    border-radius: 5px;
     flex-shrink: 0;
 }
 
 .hero-qr-image img {
     display: block;
-    width: 75px;
-    height: 75px;
+    width: 110px;
+    height: 110px;
 }
 
 .hero-qr-text {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
 }
 
 .hero-qr-text strong {
     color: #00d9ff;
-    font-size: 10px;
-    letter-spacing: 1px;
+    font-size: 12px;
+    letter-spacing: 1.3px;
 }
 
 .hero-qr-text span {
     color: #8da3b0;
-    font-size: 11px;
-    line-height: 1.4;
+    font-size: 13px;
+    line-height: 1.5;
 }
 
+/* RESPONSIVIDADE */
 @media (max-width: 768px) {
-    .hero-visual {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
     .hero-qr {
-        position: static;
+        position: relative;
+        top: auto;
+        right: auto;
+        left: auto;
         transform: none;
-        margin: 20px auto;
-        width: min(310px, 100%);
+        width: min(370px, 100%);
+        margin: 25px auto;
     }
 }
