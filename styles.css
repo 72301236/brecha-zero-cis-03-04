@@ -294,53 +294,57 @@ body{font-size:18px}
   }
 }
 
-/* QR CODE - ACESSO PELO CELULAR */
+/* QR CODE AO LADO DO RADAR */
+.hero-visual {
+    position: relative;
+}
+
 .hero-qr {
+    position: absolute;
+    top: calc(50% + 175px);
+    right: 50%;
+    transform: translateX(50%);
+
     display: flex;
     align-items: center;
-    gap: 16px;
-    width: fit-content;
-    max-width: 340px;
-    margin: 25px auto 0;
-    padding: 14px;
+    gap: 12px;
+    width: 310px;
+    padding: 10px 14px;
+    margin: 0;
+
     background: rgba(8, 20, 28, 0.95);
     border: 1px solid rgba(0, 217, 255, 0.35);
-    border-radius: 10px;
+    border-radius: 8px;
+    z-index: 5;
 }
 
 .hero-qr-image {
     background: #fff;
-    padding: 7px;
-    border-radius: 5px;
+    padding: 5px;
+    border-radius: 4px;
     flex-shrink: 0;
 }
 
 .hero-qr-image img {
     display: block;
-    width: 90px;
-    height: 90px;
+    width: 75px;
+    height: 75px;
 }
 
 .hero-qr-text {
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 5px;
 }
 
 .hero-qr-text strong {
     color: #00d9ff;
-    font-size: 11px;
-    letter-spacing: 1.5px;
+    font-size: 10px;
+    letter-spacing: 1px;
 }
 
 .hero-qr-text span {
     color: #8da3b0;
-    font-size: 12px;
-    line-height: 1.5;
-}
-
-@media (max-width: 768px) {
-    .hero-qr {
-        margin: 25px auto;
-    }
+    font-size: 11px;
+    line-height: 1.4;
 }
