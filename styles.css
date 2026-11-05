@@ -293,3 +293,54 @@ body{font-size:18px}
     height: 210px;
   }
 }
+
+/* QR CODE - ACESSO PELO CELULAR */
+.hero-qr {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: fit-content;
+    max-width: 340px;
+    margin: 25px auto 0;
+    padding: 14px;
+    background: rgba(8, 20, 28, 0.95);
+    border: 1px solid rgba(0, 217, 255, 0.35);
+    border-radius: 10px;
+}
+
+.hero-qr-image {
+    background: #fff;
+    padding: 7px;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+
+.hero-qr-image img {
+    display: block;
+    width: 90px;
+    height: 90px;
+}
+
+.hero-qr-text {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.hero-qr-text strong {
+    color: #00d9ff;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+.hero-qr-text span {
+    color: #8da3b0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .hero-qr {
+        margin: 25px auto;
+    }
+}
