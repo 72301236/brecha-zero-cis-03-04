@@ -715,7 +715,7 @@ function runAttack(){
 // DESAFIO DO ORÇAMENTO
 // -----------------------------------------------------
 let spent=0;
-const BUDGET=100000;
+const BUDGET=60000;
 const formatBRL=(value)=>value.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0});
 function investment(btn){
  const cost=Number(btn.dataset.cost);
@@ -731,7 +731,7 @@ function updateInvestmentPanel(){
  const remain=BUDGET-spent;
  document.getElementById("budgetSpent").textContent=formatBRL(spent);
  document.getElementById("budgetValue").textContent=formatBRL(remain);
- document.getElementById("budgetProgress").style.width=(spent/BUDGET*100)+"%";
+ document.getElementById("budgetProgress").style.width=(spent/BUDGET*60)+"%";
  document.getElementById("budgetMessage").textContent=
  spent===0?"Escolha as medidas e monte sua estratégia.":
  spent<BUDGET?"Você ainda tem orçamento disponível. Pense nos riscos que ficaram sem cobertura.":
